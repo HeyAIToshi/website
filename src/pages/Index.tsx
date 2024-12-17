@@ -155,7 +155,7 @@ export default function Index() {
                 <h3 className="text-xl font-semibold mb-2">{cake.name}</h3>
                 <p className="text-gray-600 mb-4">{cake.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-bold">${cake.price.toFixed(2)}</span>
+                  <span className="text-lg font-bold">₹{cake.price.toFixed(2)}</span>
                   <div className="flex gap-2">
                     <Button
                       variant="outline"

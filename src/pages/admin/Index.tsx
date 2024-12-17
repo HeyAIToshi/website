@@ -10,6 +10,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogFooter,
 } from "@/components/ui/dialog"
 import {
   Table,
@@ -46,6 +47,8 @@ export default function AdminIndex() {
   const [cakes, setCakes] = useState<Cake[]>([])
   const [loading, setLoading] = useState(true)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+  const [cakeToDelete, setCakeToDelete] = useState<number | null>(null)
   const [selectedCake, setSelectedCake] = useState<Cake | null>(null)
   const [formData, setFormData] = useState<Partial<Cake>>({
     name: '',
@@ -121,19 +124,18 @@ export default function AdminIndex() {
   }
 
   const handleDelete = async (id: number) => {
-    if (window.confirm('Are you sure you want to delete this cake?')) {
-      try {
-        const { error } = await supabase
-          .from('cakes')
-          .delete()
-          .eq('id', id)
+    try {
+      const { error } = await supabase
+        .from('cakes')
+        .delete()
+        .eq('id', id)
 
-        if (error) throw error
+      if (error) throw error
 
-        fetchCakes()
-      } catch (error) {
-        console.error('Error deleting cake:', error)
-      }
+      fetchCakes()
+      setIsDeleteDialogOpen(false)
+    } catch (error) {
+      console.error('Error deleting cake:', error)
     }
   }
 
@@ -213,7 +215,7 @@ export default function AdminIndex() {
                 </TableCell>
                 <TableCell>{cake.name}</TableCell>
                 <TableCell>{cake.category}</TableCell>
-                <TableCell>${cake.price.toFixed(2)}</TableCell>
+                <TableCell>₹{cake.price.toFixed(2)}</TableCell>
                 <TableCell>
                   <div className="flex gap-2">
                     <Button
@@ -228,7 +230,10 @@ export default function AdminIndex() {
                     </Button>
                     <Button
                       variant="destructive"
-                      onClick={() => handleDelete(cake.id)}
+                      onClick={() => {
+                        setCakeToDelete(cake.id)
+                        setIsDeleteDialogOpen(true)
+                      }}
                     >
                       Delete
                     </Button>
@@ -239,6 +244,29 @@ export default function AdminIndex() {
           </TableBody>
         </Table>
       )}
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this cake? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={() => cakeToDelete && handleDelete(cakeToDelete)}
+            >
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
