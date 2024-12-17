@@ -163,7 +163,7 @@ export default function AdminIndex() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
         <h1 className="text-3xl font-bold">Cake Management</h1>
         <div className="flex gap-4">
           <Button onClick={() => {
@@ -198,56 +198,58 @@ export default function AdminIndex() {
       {loading ? (
         <div className="text-center">Loading...</div>
       ) : (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Image</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Price</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {cakes.map((cake) => (
-              <TableRow key={cake.id}>
-                <TableCell>
-                  <img
-                    src={`${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/cakes/${cake.image_url}`}
-                    alt={cake.name}
-                    className="w-16 h-16 object-cover rounded"
-                  />
-                </TableCell>
-                <TableCell>{cake.name}</TableCell>
-                <TableCell>{cake.category}</TableCell>
-                <TableCell>₹{cake.price.toFixed(2)}</TableCell>
-                <TableCell>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setSelectedCake(cake)
-                        setFormData(cake)
-                        setIsDialogOpen(true)
-                      }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="destructive"
-                      onClick={() => {
-                        setCakeToDelete(cake.id)
-                        setIsDeleteDialogOpen(true)
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </TableCell>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Image</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Category</TableHead>
+                <TableHead>Price</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {cakes.map((cake) => (
+                <TableRow key={cake.id}>
+                  <TableCell>
+                    <img
+                      src={`${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/cakes/${cake.image_url}`}
+                      alt={cake.name}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                  </TableCell>
+                  <TableCell>{cake.name}</TableCell>
+                  <TableCell>{cake.category}</TableCell>
+                  <TableCell>₹{cake.price.toFixed(2)}</TableCell>
+                  <TableCell>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setSelectedCake(cake)
+                          setFormData(cake)
+                          setIsDialogOpen(true)
+                        }}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="destructive"
+                        onClick={() => {
+                          setCakeToDelete(cake.id)
+                          setIsDeleteDialogOpen(true)
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       )}
 
       {/* Delete Confirmation Dialog */}
@@ -274,12 +276,12 @@ export default function AdminIndex() {
       </Dialog>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-[95vw] sm:max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{selectedCake ? 'Edit Cake' : 'Add New Cake'}</DialogTitle>
             <DialogDescription>
               <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   <div className="space-y-1">
                     <label className="text-sm">Name</label>
                     <Input
@@ -309,7 +311,7 @@ export default function AdminIndex() {
                     />
                   </div>
 
-                  <div className="col-span-3 space-y-1">
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 space-y-1">
                     <label className="text-sm">Image</label>
                     <Input
                       type="file"
@@ -319,7 +321,7 @@ export default function AdminIndex() {
                     />
                   </div>
 
-                  <div className="col-span-3 space-y-1">
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 space-y-1">
                     <label className="text-sm">Description</label>
                     <Textarea
                       value={formData.description}
@@ -356,7 +358,7 @@ export default function AdminIndex() {
                     />
                   </div>
 
-                  <div className="col-span-3 grid grid-cols-4 gap-3">
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div className="space-y-1">
                       <label className="text-sm">Calories</label>
                       <Input
@@ -418,7 +420,7 @@ export default function AdminIndex() {
                     </div>
                   </div>
 
-                  <div className="col-span-2 space-y-1">
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 space-y-1">
                     <label className="text-sm">Serving Size</label>
                     <Input
                       value={formData.serving_size}
@@ -426,7 +428,7 @@ export default function AdminIndex() {
                     />
                   </div>
 
-                  <div className="col-span-3 space-y-1">
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 space-y-1">
                     <label className="text-sm">Storage Instructions</label>
                     <Textarea
                       value={formData.storage_instructions}
@@ -436,11 +438,19 @@ export default function AdminIndex() {
                   </div>
                 </div>
 
-                <div className="flex justify-end gap-2 mt-6">
-                  <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
+                <div className="flex flex-col sm:flex-row justify-end gap-2 mt-6">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => setIsDialogOpen(false)}
+                    className="w-full sm:w-auto"
+                  >
                     Cancel
                   </Button>
-                  <Button type="submit">
+                  <Button 
+                    type="submit"
+                    className="w-full sm:w-auto"
+                  >
                     {selectedCake ? 'Update' : 'Create'} Cake
                   </Button>
                 </div>
