@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Share2, ChevronRight } from 'lucide-react'
+import { toast } from "sonner"
 
 interface Cake {
   id: number
@@ -74,14 +75,21 @@ export default function Index() {
 
   const handleShare = async (cake: Cake) => {
     try {
-      await navigator.share({
-        title: cake.name,
-        text: cake.description,
-        url: `${window.location.origin}/cake/${cake.id}`
-      })
+      if (navigator.share) {
+        await navigator.share({
+          text: `Check out this amazing ${cake?.name} from Cake Shop!\n`,
+          url: window.location.href
+        })
+      } else {
+        await navigator.clipboard.writeText(window.location.href)
+        toast.success("Link copied to clipboard!")
+      }
     } catch (error) {
-      // Fallback to copying to clipboard
-      navigator.clipboard.writeText(`${window.location.origin}/cake/${cake.id}`)
+      console.error('Error sharing:', error)
+      // Only show error if it's not just user canceling the share dialog
+      if (error instanceof Error && error.name !== 'AbortError') {
+        toast.error("Failed to share. Link copied to clipboard instead.")
+      }
     }
   }
 

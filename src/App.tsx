@@ -5,6 +5,7 @@ import Index from './pages/Index'
 import CakeDetails from './pages/CakeDetails'
 import AdminLogin from './pages/admin/Login'
 import AdminIndex from './pages/admin/Index'
+import { Toaster } from "sonner"
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -46,21 +47,24 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/cake/:id" element={<CakeDetails />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminIndex />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+    <>
+      <Toaster />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/cake/:id" element={<CakeDetails />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminIndex />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   )
 }
 

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { Button } from "@/components/ui/button"
 import { Share2 } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface Cake {
   id: number
@@ -57,12 +58,21 @@ export default function CakeDetails() {
 
   const handleShare = async () => {
     try {
-      await navigator.share({
-        url: window.location.href
-      })
+      if (navigator.share) {
+        await navigator.share({
+          text: `Check out this amazing ${cake?.name} from Cake Shop!\n`,
+          url: window.location.href
+        })
+      } else {
+        await navigator.clipboard.writeText(window.location.href)
+        toast.success("Link copied to clipboard!")
+      }
     } catch (error) {
-      // Fallback to copying to clipboard
-      navigator.clipboard.writeText(window.location.href)
+      console.error('Error sharing:', error)
+      // Only show error if it's not just user canceling the share dialog
+      if (error instanceof Error && error.name !== 'AbortError') {
+        toast.error("Failed to share. Link copied to clipboard instead.")
+      }
     }
   }
 
