@@ -108,9 +108,11 @@ export default function CakeDetails() {
               <h1 className="text-4xl font-bold mb-2">{cake.name}</h1>
               <p className="text-xl text-gray-600 mb-4">{cake.description}</p>
               <div className="text-3xl font-bold text-primary mb-6">
-                ${cake.price.toFixed(2)}
+                ₹{cake.price.toFixed(2)}
               </div>
-              <Button size="lg" className="w-full">Order Now</Button>
+              <Button size="lg" className="w-full">
+                Order Now
+              </Button>
             </div>
 
             {cake.ingredients && (
