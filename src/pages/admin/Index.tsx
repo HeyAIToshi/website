@@ -3,7 +3,7 @@ import { supabase } from '../../lib/supabase'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Dialog,
   DialogContent,
@@ -42,8 +42,7 @@ interface Cake {
 }
 
 export default function AdminIndex() {
-  const [searchParams] = useSearchParams()
-  const isAuthorized = searchParams.get('password') === 'anam'
+  const navigate = useNavigate()
   const [cakes, setCakes] = useState<Cake[]>([])
   const [loading, setLoading] = useState(true)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -68,21 +67,22 @@ export default function AdminIndex() {
     storage_instructions: ''
   })
 
-  if (!isAuthorized) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
-          <h1 className="text-3xl font-bold text-red-600 mb-4">Unauthorized Access</h1>
-          <p className="text-gray-600">You do not have permission to access this page.</p>
-        </div>
-      </div>
-    )
-  }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
+    checkAuth()
     fetchCakes()
   }, [])
+
+  const checkAuth = async () => {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) {
+      navigate('/admin/login')
+    }
+  }
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    navigate('/admin/login')
+  }
 
   const fetchCakes = async () => {
     try {
@@ -165,29 +165,34 @@ export default function AdminIndex() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Cake Management</h1>
-        <Button onClick={() => {
-          setSelectedCake(null)
-          setFormData({
-            name: '',
-            description: '',
-            price: 0,
-            category: '',
-            ingredients: [],
-            allergens: [],
-            nutrition_info: {
-              calories: 0,
-              protein: 0,
-              carbs: 0,
-              fat: 0
-            },
-            preparation_time: 0,
-            serving_size: '',
-            storage_instructions: ''
-          })
-          setIsDialogOpen(true)
-        }}>
-          Add New Cake
-        </Button>
+        <div className="flex gap-4">
+          <Button onClick={() => {
+            setSelectedCake(null)
+            setFormData({
+              name: '',
+              description: '',
+              price: 0,
+              category: '',
+              ingredients: [],
+              allergens: [],
+              nutrition_info: {
+                calories: 0,
+                protein: 0,
+                carbs: 0,
+                fat: 0
+              },
+              preparation_time: 0,
+              serving_size: '',
+              storage_instructions: ''
+            })
+            setIsDialogOpen(true)
+          }}>
+            Add New Cake
+          </Button>
+          <Button variant="outline" onClick={handleLogout}>
+            Logout
+          </Button>
+        </div>
       </div>
 
       {loading ? (
