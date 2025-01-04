@@ -52,9 +52,9 @@
 }
 
 /* Custom cursor */
-* {
+/* * {
   cursor: url("/cursor.svg"), auto !important;
-}
+} */
 
 /* Animations */
 @keyframes float {
