@@ -219,16 +219,43 @@ export default function TraycerLanding() {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-[#020817] transition-colors duration-300">
       <main className="flex-1 flex flex-col items-center justify-center p-1 sm:p-4 relative overflow-hidden">
-        {/* Background gradients */}
+        {/* Enhanced Background gradients */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-white dark:from-[#0c1b3b] dark:via-[#0a1429] dark:to-[#020817]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.1),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(1,65,255,0.15),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.15),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(1,65,255,0.2),transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0)_0%,rgba(255,255,255,0.8)_100%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.4)_100%)]" />
+          {/* Add animated gradient orbs */}
+          <motion.div
+            className="absolute top-1/4 -left-48 w-96 h-96 bg-gradient-to-r from-blue-400/30 to-purple-400/30 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, 100, 0],
+              y: [0, 50, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 -right-48 w-96 h-96 bg-gradient-to-r from-green-400/30 to-emerald-400/30 dark:from-green-500/20 dark:to-emerald-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, -100, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
         </div>
 
-        {/* Navbar */}
-        <nav className="flex items-center justify-between p-1 sm:p-2 md:p-3 max-w-7xl mx-auto w-full z-10 backdrop-blur-sm bg-white/50 dark:bg-[#0c1b3b]/10 rounded-xl sm:rounded-2xl my-2 sm:my-4 border border-gray-200/70 dark:border-[#1a2b4b]/70 shadow-lg shadow-black/[0.08] dark:shadow-blue-500/[0.08]">
+        {/* Enhanced Navbar */}
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-1 sm:p-2 md:p-3 max-w-7xl mx-auto w-full backdrop-blur-sm bg-white/50 dark:bg-[#0c1b3b]/10 rounded-xl sm:rounded-2xl my-2 sm:my-4 border border-gray-200/70 dark:border-[#1a2b4b]/70 shadow-lg shadow-black/[0.08] dark:shadow-blue-500/[0.08]">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -238,26 +265,40 @@ export default function TraycerLanding() {
               traycer
             </span>
           </motion.div>
-          <div className="hidden md:flex items-center gap-12 text-sm text-gray-600 dark:text-blue-100/70">
-            <a
-              href="#"
-              className="hover:text-black dark:hover:text-white transition-colors"
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="hidden md:flex items-center gap-12 text-sm text-gray-600 dark:text-blue-100/70"
+          >
+            <motion.a
+              href="#features"
+              className="hover:text-black dark:hover:text-white transition-colors relative group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Capabilities
-            </a>
-            <a
-              href="#"
-              className="hover:text-black dark:hover:text-white transition-colors"
+              <span>Features</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black dark:bg-blue-400 transition-all group-hover:w-full" />
+            </motion.a>
+            <motion.a
+              href="#pricing"
+              className="hover:text-black dark:hover:text-white transition-colors relative group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Pricing
-            </a>
-            <a
-              href="#"
-              className="hover:text-black dark:hover:text-white transition-colors"
+              <span>Pricing</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black dark:bg-blue-400 transition-all group-hover:w-full" />
+            </motion.a>
+            <motion.a
+              href="#faq"
+              className="hover:text-black dark:hover:text-white transition-colors relative group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              FAQ
-            </a>
-          </div>
+              <span>FAQ</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black dark:bg-blue-400 transition-all group-hover:w-full" />
+            </motion.a>
+          </motion.div>
           <div className="flex items-center gap-4 w-[120px] justify-end">
             <ThemeToggle />
             <motion.a
@@ -269,56 +310,84 @@ export default function TraycerLanding() {
               Login
             </motion.a>
           </div>
-          <div className="flex md:hidden items-center">
-            <button className="p-2 text-gray-600 dark:text-blue-100/70 hover:text-black dark:hover:text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
+          <motion.button
+            className="flex md:hidden items-center p-2 text-gray-600 dark:text-blue-100/70 hover:text-black dark:hover:text-white"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </motion.button>
         </nav>
 
-        {/* Hero Section */}
-        <div className="relative z-10 text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 pt-6 pb-4 sm:pb-8 sm:pt-10 px-4">
+        {/* Enhanced Hero Section */}
+        <div className="relative z-10 text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 pt-24 sm:pt-32 pb-4 sm:pb-8 px-4">
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="flex items-center justify-center gap-2 text-sm">
-              <span className="px-3 py-1 rounded-full bg-black/5 dark:bg-blue-500/20 text-black dark:text-blue-100 font-medium border border-black/10 dark:border-blue-500/30">
+            <motion.div
+              className="flex items-center justify-center gap-2 text-sm"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <motion.span
+                className="px-3 py-1 rounded-full bg-black/5 dark:bg-blue-500/20 text-black dark:text-blue-100 font-medium border border-black/10 dark:border-blue-500/30"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 New Release
+              </motion.span>
+              <motion.span
+                className="text-gray-600 dark:text-blue-100/70 flex items-center gap-1"
+                whileHover={{ x: 5 }}
+              >
+                Introducing AI-powered code reviews
+                <HiArrowRight className="inline-block" />
+              </motion.span>
+            </motion.div>
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-black dark:text-white leading-[1.1]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              Transform Your Code{" "}
+              <span className="relative">
+                <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 blur" />
+                <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                  With AI Magic
+                </span>
               </span>
-              <span className="text-gray-600 dark:text-blue-100/70">
-                Introducing AI-powered code reviews →
-              </span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-black dark:text-white">
-              Transform Your Code <br />
-              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-                With AI Magic
-              </span>
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-blue-100/70 max-w-3xl mx-auto">
+            </motion.h1>
+            <motion.p
+              className="text-xl sm:text-2xl text-gray-600 dark:text-blue-100/70 max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
               Experience the future of coding with Traycer. Write better code
               faster, catch bugs earlier, and let AI handle the heavy lifting.
-            </p>
+            </motion.p>
           </motion.div>
 
           <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -327,7 +396,7 @@ export default function TraycerLanding() {
               href="vscode:extension/cursor.cursor"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-black dark:bg-blue-500 text-white text-base sm:text-lg font-medium transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+              className="group relative px-8 py-4 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
             >
               <span className="relative z-10">Install Now - It's Free</span>
               <HiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
@@ -338,7 +407,7 @@ export default function TraycerLanding() {
               href="#"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group px-8 py-4 rounded-xl text-black dark:text-white text-lg font-medium transition-all duration-300 flex items-center gap-2 border-2 border-black/10 dark:border-blue-500/30 hover:border-black/30 dark:hover:border-blue-500/50"
+              className="group px-8 py-4 rounded-xl text-black dark:text-white text-lg font-medium transition-all duration-300 flex items-center gap-2 border-2 border-black/10 dark:border-blue-500/30 hover:border-black/30 dark:hover:border-blue-500/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm"
             >
               <PlayIcon className="w-5 h-5" />
               Watch Demo
@@ -346,36 +415,55 @@ export default function TraycerLanding() {
           </motion.div>
 
           <motion.div
-            className="pt-8 flex flex-col items-center gap-4"
+            className="pt-12 flex flex-col items-center gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-blue-100/70">
-              <div className="flex items-center gap-2">
+              <motion.div
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50"
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
                 <HiCheck className="text-black dark:text-blue-400" />
                 <span>100% Free for Open Source</span>
-              </div>
-              <div className="flex items-center gap-2">
+              </motion.div>
+              <motion.div
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50"
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
                 <HiCheck className="text-black dark:text-blue-400" />
                 <span>No Credit Card Required</span>
-              </div>
-              <div className="flex items-center gap-2">
+              </motion.div>
+              <motion.div
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50"
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
                 <HiCheck className="text-black dark:text-blue-400" />
                 <span>Works Offline</span>
-              </div>
+              </motion.div>
             </div>
-            <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-blue-100/70">
-              <div className="flex -space-x-2">
+            <motion.div
+              className="flex items-center gap-4 text-sm"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex -space-x-3">
                 {[...Array(4)].map((_, i) => (
-                  <div
+                  <motion.div
                     key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-blue-400 dark:to-blue-600 border-2 border-white dark:border-[#020817]"
-                  />
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-blue-400 dark:to-blue-600 border-2 border-white dark:border-[#020817] flex items-center justify-center text-white dark:text-blue-100 font-medium text-xs"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.8 + i * 0.1 }}
+                  >
+                    {String.fromCharCode(65 + i)}
+                  </motion.div>
                 ))}
               </div>
-              <p>Trusted by 10,000+ developers</p>
-            </div>
+              <p className="text-gray-600 dark:text-blue-100/70 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-200/50 dark:border-[#1a2b4b]/50">
+                Trusted by 10,000+ developers
+              </p>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -476,8 +564,11 @@ export default function TraycerLanding() {
         </div>
 
         {/* Statistics Section */}
-        <section className="py-4 sm:py-8 w-full backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4">
+        <section className="py-16 sm:py-24 w-full backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.15),transparent_50%)]" />
+
+          <div className="max-w-7xl mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -489,76 +580,131 @@ export default function TraycerLanding() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+                whileHover={{ y: -5 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
-                  10k+
-                </div>
-                <div className="text-gray-600 dark:text-blue-100/70">
-                  Active Users
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <motion.div
+                  className="relative z-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2 group-hover:scale-110 transition-transform duration-300">
+                    10k+
+                  </div>
+                  <div className="text-gray-600 dark:text-blue-100/70">
+                    Active Users
+                  </div>
+                </motion.div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+                whileHover={{ y: -5 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
-                  1M+
-                </div>
-                <div className="text-gray-600 dark:text-blue-100/70">
-                  Lines Enhanced
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 dark:from-green-500/20 dark:to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <motion.div
+                  className="relative z-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2 group-hover:scale-110 transition-transform duration-300">
+                    1M+
+                  </div>
+                  <div className="text-gray-600 dark:text-blue-100/70">
+                    Lines Enhanced
+                  </div>
+                </motion.div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+                whileHover={{ y: -5 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
-                  50+
-                </div>
-                <div className="text-gray-600 dark:text-blue-100/70">
-                  Languages
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 dark:from-yellow-500/20 dark:to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <motion.div
+                  className="relative z-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2 group-hover:scale-110 transition-transform duration-300">
+                    50+
+                  </div>
+                  <div className="text-gray-600 dark:text-blue-100/70">
+                    Languages
+                  </div>
+                </motion.div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+                whileHover={{ y: -5 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
-                  100%
-                </div>
-                <div className="text-gray-600 dark:text-blue-100/70">
-                  Satisfaction
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-500/10 dark:from-red-500/20 dark:to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <motion.div
+                  className="relative z-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2 group-hover:scale-110 transition-transform duration-300">
+                    100%
+                  </div>
+                  <div className="text-gray-600 dark:text-blue-100/70">
+                    Satisfaction
+                  </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>
         </section>
 
         {/* Features Grid */}
-        <section className="py-4 sm:py-8 w-full max-w-7xl mx-auto px-4 relative z-10">
+        <section
+          className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4 relative z-10"
+          id="features"
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center space-y-6 mb-24"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-              Everything You Need to <br />
-              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-                Code Faster
+            <motion.span
+              className="text-sm font-medium text-gray-600 dark:text-blue-100/70 bg-black/5 dark:bg-blue-500/20 px-4 py-2 rounded-full inline-block"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              Features
+            </motion.span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black dark:text-white">
+              Everything You Need to{" "}
+              <span className="relative">
+                <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 blur" />
+                <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                  Code Faster
+                </span>
               </span>
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+            <p className="text-xl text-gray-600 dark:text-blue-100/70 max-w-2xl mx-auto">
               Powerful features designed to transform your development workflow
             </p>
           </motion.div>
@@ -567,386 +713,555 @@ export default function TraycerLanding() {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                transition={{ delay: index * 0.1 }}
-                className="group p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
-              >
-                <div className="flex flex-col gap-6">
-                  <div className="transition-transform duration-300">
-                    {feature.icon}
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-bold text-black dark:text-white">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-blue-100/70 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      {/* Integration Showcase */}
-      <section className="py-4 sm:py-8 w-full max-w-7xl mx-auto px-4">
-        <motion.div
-
-          className="text-center space-y-8 mb-16"
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-            Seamless{" "}
-            <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-              Integrations
-            </span>
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-            Works with your favorite tools and frameworks
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { name: "VS Code", icon: "vscode.svg" },
-            { name: "GitHub", icon: "github.svg" },
-            { name: "GitLab", icon: "gitlab.svg" },
-            { name: "Bitbucket", icon: "bitbucket.svg" },
-            { name: "React", icon: "react.svg" },
-            { name: "Vue", icon: "vue.svg" },
-            { name: "Angular", icon: "angular.svg" },
-            { name: "Node.js", icon: "nodejs.svg" },
-          ].map((tool, index) => (
-            <motion.div
-              key={tool.name}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="p-6 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
-            >
-              <div className="aspect-square rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-[#1a2b4b] dark:to-[#0c1b3b] p-4 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                <div className="w-12 h-12 text-gray-600 dark:text-blue-100/70" />
-              </div>
-              <div className="mt-4 text-center font-medium text-gray-900 dark:text-white">
-                {tool.name}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-8 sm:py-16 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center space-y-6 mb-24"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-              Loved by{" "}
-              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-                Developers
-              </span>
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-              See what others are saying about Traycer
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm shadow-xl shadow-black/5 dark:shadow-blue-500/5 border border-gray-200/50 dark:border-[#1a2b4b]/50 space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
+                whileHover={{ y: -5 }}
+                className="group p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
               >
-                <p className="text-lg text-gray-600 dark:text-blue-100/70 italic leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 shadow-lg shadow-black/20 dark:shadow-blue-500/20" />
-                  <div>
-                    <p className="font-semibold text-lg text-black dark:text-white">
-                      {testimonial.author}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-blue-100/70">
-                      {testimonial.role}
-                    </p>
+                <div className="flex flex-col gap-6">
+                  <motion.div
+                    className="transition-transform duration-300 group-hover:scale-110"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.2 }}
+                  >
+                    {feature.icon}
+                  </motion.div>
+                  <div className="space-y-3">
+                    <motion.h3
+                      className="text-xl font-bold text-black dark:text-white"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + 0.3 }}
+                    >
+                      {feature.title}
+                    </motion.h3>
+                    <motion.p
+                      className="text-gray-600 dark:text-blue-100/70 leading-relaxed"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + 0.4 }}
+                    >
+                      {feature.description}
+                    </motion.p>
                   </div>
+                  <motion.div
+                    className="mt-4 flex items-center gap-2 text-sm text-black/60 dark:text-blue-400/60 group-hover:text-black dark:group-hover:text-blue-400 transition-colors duration-300"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.5 }}
+                  >
+                    <span>Learn more</span>
+                    <HiArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* VS Code Integration Section */}
-      <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4">
+          {/* Feature Highlight */}
           <motion.div
+            className="mt-24 p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-black/5 to-black/0 dark:from-blue-500/10 dark:to-purple-500/5 border border-gray-200/50 dark:border-[#1a2b4b]/50 backdrop-blur-sm relative overflow-hidden group"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center space-y-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-              Get Started in{" "}
-              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-                Seconds
-              </span>
-            </h2>
-            <div className="max-w-3xl mx-auto space-y-8">
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-                Install Traycer directly in VS Code and transform how you write
-                code. No complex setup, no configuration needed.
-              </p>
+            {/* Background Gradients */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 dark:from-blue-500/10 dark:to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(1,65,255,0.2),transparent_50%)]" />
+
+            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12">
+              <div className="flex-1 space-y-6">
+                <motion.h3
+                  className="text-3xl sm:text-4xl font-bold text-black dark:text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
+                  AI-Powered Code Reviews{" "}
+                  <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                    in Real-Time
+                  </span>
+                </motion.h3>
+                <motion.p
+                  className="text-xl text-gray-600 dark:text-blue-100/70"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                >
+                  Get instant, context-aware feedback that catches issues before
+                  they reach production. It's like having a senior engineer
+                  always by your side.
+                </motion.p>
+                <motion.div
+                  className="flex flex-wrap gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                >
+                  {[
+                    "Smart Suggestions",
+                    "Error Prevention",
+                    "Best Practices",
+                    "Security Checks",
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 text-sm text-gray-600 dark:text-blue-100/70"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                      <HiCheck className="text-black dark:text-blue-400" />
+                      <span>{item}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
               <motion.div
-                className="space-y-6 text-lg text-gray-600 dark:text-blue-100/70"
+                className="flex-1 relative"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-black/5 dark:shadow-blue-500/10">
+                  <HoverVideoPlayer
+                    videoSrc="/review.mp4"
+                    thumbnailSrc="/review.webp"
+                    className="w-full aspect-video"
+                    pausedOverlay={
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                        <PlayIcon className="w-16 h-16 text-white" />
+                      </div>
+                    }
+                    loadingOverlay={
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                        <LoaderCircle className="w-16 h-16 text-white animate-spin" />
+                      </div>
+                    }
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm relative">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.15),transparent_50%)]" />
+          <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center space-y-6 mb-24"
+            >
+              <motion.span
+                className="text-sm font-medium text-gray-600 dark:text-blue-100/70 bg-black/5 dark:bg-blue-500/20 px-4 py-2 rounded-full inline-block"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
-                  <HiCheck className="text-2xl text-black dark:text-blue-400" />
-                  <span>One-click installation in VS Code</span>
-                </div>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
-                  <HiCheck className="text-2xl text-black dark:text-blue-400" />
-                  <span>Instant AI assistance with familiar commands</span>
-                </div>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
-                  <HiCheck className="text-2xl text-black dark:text-blue-400" />
-                  <span>Works with your existing shortcuts and workflow</span>
-                </div>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
-                  <HiCheck className="text-2xl text-black dark:text-blue-400" />
-                  <span>Free to get started - no credit card required</span>
-                </div>
-              </motion.div>
+                Testimonials
+              </motion.span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black dark:text-white">
+                Loved by{" "}
+                <span className="relative">
+                  <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 blur" />
+                  <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                    Developers
+                  </span>
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-blue-100/70 max-w-2xl mx-auto">
+                See what others are saying about Traycer
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm shadow-xl shadow-black/5 dark:shadow-blue-500/5 border border-gray-200/50 dark:border-[#1a2b4b]/50 space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
+                >
+                  {/* Background Gradients */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(1,65,255,0.2),transparent_50%)]" />
+
+                  <div className="relative z-10">
+                    <motion.div
+                      className="flex items-center gap-1 text-yellow-500 dark:text-yellow-400 mb-6"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + 0.2 }}
+                    >
+                      {[...Array(5)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className="w-5 h-5 fill-current"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                      ))}
+                    </motion.div>
+                    <motion.p
+                      className="text-lg text-gray-600 dark:text-blue-100/70 italic leading-relaxed relative"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + 0.3 }}
+                    >
+                      <span className="absolute -top-4 -left-2 text-4xl text-black/10 dark:text-blue-500/20">
+                        "
+                      </span>
+                      {testimonial.quote}
+                      <span className="absolute -bottom-4 -right-2 text-4xl text-black/10 dark:text-blue-500/20">
+                        "
+                      </span>
+                    </motion.p>
+                    <motion.div
+                      className="flex items-center gap-4 mt-8"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + 0.4 }}
+                    >
+                      <div className="h-12 w-12 rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 shadow-lg shadow-black/20 dark:shadow-blue-500/20 flex items-center justify-center text-white dark:text-blue-100 font-medium text-lg">
+                        {testimonial.author[0]}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-lg text-black dark:text-white">
+                          {testimonial.author}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-blue-100/70">
+                          {testimonial.role}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-            <motion.a
-              href="vscode:extension/cursor.cursor"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
-            >
-              <span className="relative z-10">Install Free Extension</span>
-              <HiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
-            </motion.a>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center space-y-8"
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-            Simple,{" "}
-            <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-              Transparent
-            </span>{" "}
-            Pricing
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-            Get started free today - no credit card required
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-8">
-            {/* Free Tier */}
+            {/* Social Proof */}
             <motion.div
+              className="mt-24 text-center space-y-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
             >
-              <h3 className="text-2xl font-bold text-black dark:text-white">
-                Free
+              <h3 className="text-2xl sm:text-3xl font-bold text-black dark:text-white">
+                Join the growing community of developers
               </h3>
-              <div className="text-4xl font-bold text-black dark:text-white">
-                $0
+              <div className="flex flex-wrap justify-center gap-8">
+                <motion.div
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 text-gray-600 dark:text-blue-100/70"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                >
+                  <FaGithub className="w-5 h-5" />
+                  <span>10k+ Stars on GitHub</span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 text-gray-600 dark:text-blue-100/70"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                >
+                  <FaDiscord className="w-5 h-5" />
+                  <span>5k+ Discord Members</span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 text-gray-600 dark:text-blue-100/70"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                >
+                  <FaTwitter className="w-5 h-5" />
+                  <span>20k+ Twitter Followers</span>
+                </motion.div>
               </div>
-              <p className="text-gray-600 dark:text-blue-100/70">
-                Perfect for open-source development
-              </p>
-              <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>Unlimited open-source usage</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>AI-powered code changes</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>Real-time code reviews</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>5,000 lines/hour limit</span>
-                </li>
-              </ul>
-              <motion.a
-                href="vscode:extension/cursor.cursor"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
-              >
-                <span className="relative z-10">Install Now</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
-              </motion.a>
             </motion.div>
+          </div>
+        </section>
 
-            {/* Pro Tier */}
+        {/* VS Code Integration Section */}
+        <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="p-8 rounded-2xl border-2 border-black dark:border-blue-500 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 relative scale-105 shadow-[0_0_50px_rgba(0,0,0,0.2)] dark:shadow-[0_0_50px_rgba(59,130,246,0.3)]"
+              className="text-center space-y-12"
             >
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg shadow-black/20 dark:shadow-blue-500/20">
-                Most Popular
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+                Get Started in{" "}
+                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                  Seconds
+                </span>
+              </h2>
+              <div className="max-w-3xl mx-auto space-y-8">
+                <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+                  Install Traycer directly in VS Code and transform how you
+                  write code. No complex setup, no configuration needed.
+                </p>
+                <motion.div
+                  className="space-y-6 text-lg text-gray-600 dark:text-blue-100/70"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
+                    <HiCheck className="text-2xl text-black dark:text-blue-400" />
+                    <span>One-click installation in VS Code</span>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
+                    <HiCheck className="text-2xl text-black dark:text-blue-400" />
+                    <span>Instant AI assistance with familiar commands</span>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
+                    <HiCheck className="text-2xl text-black dark:text-blue-400" />
+                    <span>Works with your existing shortcuts and workflow</span>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
+                    <HiCheck className="text-2xl text-black dark:text-blue-400" />
+                    <span>Free to get started - no credit card required</span>
+                  </div>
+                </motion.div>
               </div>
-              <h3 className="text-2xl font-bold text-black dark:text-white">
-                Pro
-              </h3>
-              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-                $8
-              </div>
-              <p className="text-gray-600 dark:text-blue-100/70">
-                /month (billed annually)
-              </p>
-              <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>Everything in Free</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>Unlimited private repos</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>Priority support</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>12,500 lines/hour limit</span>
-                </li>
-              </ul>
               <motion.a
                 href="vscode:extension/cursor.cursor"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
               >
-                <span className="relative z-10">Start Free Trial</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
-              </motion.a>
-            </motion.div>
-
-            {/* Business Tier */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
-            >
-              <h3 className="text-2xl font-bold text-black dark:text-white">
-                Business
-              </h3>
-              <div className="text-4xl font-bold text-black dark:text-white">
-                $16
-              </div>
-              <p className="text-gray-600 dark:text-blue-100/70">
-                /user/month (billed annually)
-              </p>
-              <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>Everything in Pro</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>Team management</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>Enhanced privacy mode</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
-                  <span>25,000 lines/hour/user</span>
-                </li>
-              </ul>
-              <motion.a
-                href="vscode:extension/cursor.cursor"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
-              >
-                <span className="relative z-10">Start Free Trial</span>
+                <span className="relative z-10">Install Free Extension</span>
+                <HiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
               </motion.a>
             </motion.div>
           </div>
-        </motion.div>
-      </section>
+        </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center space-y-6 mb-24"
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-            Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-              Questions
-            </span>
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-            Everything you need to know about Traycer
-          </p>
-        </motion.div>
+        {/* Pricing Section */}
+        <section className="relative z-20 py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative z-10 text-center space-y-8"
+          >
+            <h2 className="relative z-10 text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+              Simple,{" "}
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                Transparent
+              </span>{" "}
+              Pricing
+            </h2>
+            <p className="relative z-10 text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+              Get started free today - no credit card required
+            </p>
 
-        <div className="grid gap-8 max-w-3xl mx-auto">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              transition={{ delay: index * 0.1 }}
-              className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-4 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
-            >
-              <h3 className="text-2xl font-bold text-black dark:text-white">
-                {faq.question}
-              </h3>
-              <p className="text-lg text-gray-600 dark:text-blue-100/70 leading-relaxed">
-                {faq.answer}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-8">
+              {/* Free Tier */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+              >
+                <h3 className="text-2xl font-bold text-black dark:text-white">
+                  Free
+                </h3>
+                <div className="text-4xl font-bold text-black dark:text-white">
+                  $0
+                </div>
+                <p className="text-gray-600 dark:text-blue-100/70">
+                  Perfect for open-source development
+                </p>
+                <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>Unlimited open-source usage</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>AI-powered code changes</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>Real-time code reviews</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>5,000 lines/hour limit</span>
+                  </li>
+                </ul>
+                <motion.a
+                  href="vscode:extension/cursor.cursor"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+                >
+                  <span className="relative z-10">Install Now</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
+                </motion.a>
+              </motion.div>
+
+              {/* Pro Tier */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="p-8 rounded-2xl border-2 border-black dark:border-blue-500 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 relative scale-105 shadow-[0_0_50px_rgba(0,0,0,0.2)] dark:shadow-[0_0_50px_rgba(59,130,246,0.3)]"
+              >
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg shadow-black/20 dark:shadow-blue-500/20">
+                  Most Popular
+                </div>
+                <h3 className="text-2xl font-bold text-black dark:text-white">
+                  Pro
+                </h3>
+                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                  $8
+                </div>
+                <p className="text-gray-600 dark:text-blue-100/70">
+                  /month (billed annually)
+                </p>
+                <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>Everything in Free</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>Unlimited private repos</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>Priority support</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>12,500 lines/hour limit</span>
+                  </li>
+                </ul>
+                <motion.a
+                  href="vscode:extension/cursor.cursor"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+                >
+                  <span className="relative z-10">Start Free Trial</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
+                </motion.a>
+              </motion.div>
+
+              {/* Business Tier */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+              >
+                <h3 className="text-2xl font-bold text-black dark:text-white">
+                  Business
+                </h3>
+                <div className="text-4xl font-bold text-black dark:text-white">
+                  $16
+                </div>
+                <p className="text-gray-600 dark:text-blue-100/70">
+                  /user/month (billed annually)
+                </p>
+                <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>Everything in Pro</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>Team management</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>Enhanced privacy mode</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                    <span>25,000 lines/hour/user</span>
+                  </li>
+                </ul>
+                <motion.a
+                  href="vscode:extension/cursor.cursor"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+                >
+                  <span className="relative z-10">Start Free Trial</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
+                </motion.a>
+              </motion.div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="relative z-20 py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative z-10 text-center space-y-6 mb-24"
+          >
+            <h2 className="relative z-10 text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+              Frequently Asked{" "}
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                Questions
+              </span>
+            </h2>
+            <p className="relative z-10 text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+              Everything you need to know about Traycer
+            </p>
+
+            <div className="grid gap-8 max-w-3xl mx-auto">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  transition={{ delay: index * 0.1 }}
+                  className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-4 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+                >
+                  <h3 className="text-2xl font-bold text-black dark:text-white">
+                    {faq.question}
+                  </h3>
+                  <p className="text-lg text-gray-600 dark:text-blue-100/70 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+      </main>
+
       <footer className="border-t border-gray-200/50 dark:border-[#1a2b4b]/50 transition-colors duration-300 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-8 sm:py-16">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12">
