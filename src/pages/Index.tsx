@@ -407,7 +407,6 @@ export default function TraycerLanding() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-black/5 to-transparent dark:from-blue-500/20 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative w-full h-full overflow-hidden">
@@ -431,7 +430,6 @@ export default function TraycerLanding() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white leading-tight">
                 Real-Time <br />
@@ -569,9 +567,6 @@ export default function TraycerLanding() {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="group p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
               >
@@ -597,9 +592,7 @@ export default function TraycerLanding() {
       {/* Integration Showcase */}
       <section className="py-4 sm:py-8 w-full max-w-7xl mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+
           className="text-center space-y-8 mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
@@ -626,8 +619,6 @@ export default function TraycerLanding() {
           ].map((tool, index) => (
             <motion.div
               key={tool.name}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               className="p-6 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
@@ -943,9 +934,6 @@ export default function TraycerLanding() {
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-4 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
             >
