@@ -126,15 +126,15 @@ function calculateValue(item: DataItem): number {
 
       {/* Features Section */}
       <section
-        className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-950"
+        className="py-24 px-4 md:px-8 bg-neutral-100 dark:bg-neutral-900"
         id="features"
       >
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Powerful Features
             </h2>
-            <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg">
+            <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
               Everything you need to write better code, faster and more
               efficiently with AI assistance.
             </p>
@@ -150,7 +150,7 @@ function calculateValue(item: DataItem): number {
                   "p-8 rounded-2xl",
                   "bg-white dark:bg-neutral-800",
                   "border border-neutral-200 dark:border-neutral-700",
-                  "hover:shadow-xl hover:-translate-y-1 transition-all duration-300",
+                  "hover:shadow-lg transition-all duration-300",
                   "group"
                 )}
               >
@@ -175,26 +175,17 @@ function calculateValue(item: DataItem): number {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white mb-16"
           >
             Works Where You Code
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-neutral-400 text-center text-lg mb-16 max-w-2xl mx-auto"
-          >
-            Seamlessly integrate Traycer into your favorite development
-            environments
-          </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-neutral-900 rounded-3xl p-8 md:p-12 border border-neutral-800 hover:border-purple-500/50 transition-colors group"
+              className="bg-neutral-900 rounded-3xl p-8 md:p-12"
             >
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 VS Code Integration
@@ -204,7 +195,7 @@ function calculateValue(item: DataItem): number {
                 workflow.
               </p>
               <div className="flex gap-4">
-                <div className="bg-white rounded-full p-4 group-hover:scale-110 transition-transform">
+                <div className="bg-white rounded-full p-4">
                   <img src="/vscode.svg" alt="VS Code" className="w-12 h-12" />
                 </div>
               </div>
@@ -214,7 +205,7 @@ function calculateValue(item: DataItem): number {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-neutral-900 rounded-3xl p-8 md:p-12 border border-neutral-800 hover:border-purple-500/50 transition-colors group"
+              className="bg-neutral-900 rounded-3xl p-8 md:p-12"
             >
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 JetBrains Integration
@@ -224,7 +215,7 @@ function calculateValue(item: DataItem): number {
                 IDEs.
               </p>
               <div className="flex gap-4">
-                <div className="bg-white rounded-full p-4 group-hover:scale-110 transition-transform">
+                <div className="bg-white rounded-full p-4">
                   <img
                     src="/jetbrains.svg"
                     alt="JetBrains"
@@ -239,9 +230,9 @@ function calculateValue(item: DataItem): number {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-16 text-center"
+            className="mt-12 text-center"
           >
-            <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-medium hover:opacity-90 transition">
+            <button className="px-8 py-4 bg-white text-black rounded-lg font-medium hover:bg-neutral-200 transition">
               Install for Your IDE
             </button>
           </motion.div>

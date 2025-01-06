@@ -33,37 +33,142 @@ export default function TraycerLanding() {
       title: "AI-Powered Code Changes",
       description:
         "Transform your codebase with AI that plans, implements, and reviews complex changes in minutes, not hours.",
-      icon: "🤖",
+      icon: (
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 flex items-center justify-center">
+          <svg
+            className="w-6 h-6 text-blue-600 dark:text-blue-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3M12 21V17M12 3V7M21 12H17M7 12H3M18.3639 18.364L15.5355 15.5355M15.5355 8.46447L18.3639 5.63604M5.63604 18.364L8.46447 15.5355M8.46447 8.46447L5.63604 5.63604"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+      ),
     },
     {
       title: "Instant Code Reviews",
       description:
         "Get real-time, context-aware feedback that catches issues before they reach production, like having a senior engineer by your side.",
-      icon: "👀",
+      icon: (
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 dark:from-green-500/30 dark:to-emerald-500/30 flex items-center justify-center">
+          <svg
+            className="w-6 h-6 text-green-600 dark:text-green-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9 9H15M9 12H15M9 15H12M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H12.5858C12.851 3 13.1054 3.10536 13.2929 3.29289L18.7071 8.70711C18.8946 8.89464 19 9.149 19 9.41421V19C19 20.1046 18.1046 21 17 21Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      ),
     },
     {
       title: "Simple Natural Language Commands",
       description:
         "Just describe what you want to change in plain English - Traycer handles the rest with precision and care.",
-      icon: "💬",
+      icon: (
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-orange-500/20 dark:from-yellow-500/30 dark:to-orange-500/30 flex items-center justify-center">
+          <svg
+            className="w-6 h-6 text-yellow-600 dark:text-yellow-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 9H16M8 13H14M8 17H11M7.2 4H16.8C17.9201 4 18.4802 4 18.908 4.21799C19.2843 4.40973 19.5903 4.71569 19.782 5.09202C20 5.51984 20 6.07989 20 7.2V16.8C20 17.9201 20 18.4802 19.782 18.908C19.5903 19.2843 19.2843 19.5903 18.908 19.782C18.4802 20 17.9201 20 16.8 20H7.2C6.0799 20 5.51984 20 5.09202 19.782C4.71569 19.5903 4.40973 19.2843 4.21799 18.908C4 18.4802 4 17.9201 4 16.8V7.2C4 6.0799 4 5.51984 4.21799 5.09202C4.40973 4.71569 4.71569 4.40973 5.09202 4.21799C5.51984 4 6.0799 4 7.2 4Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      ),
     },
     {
       title: "Works With Your Stack",
       description:
         "Seamlessly supports all major languages and frameworks, adapting to your codebase's patterns and conventions.",
-      icon: "🌐",
+      icon: (
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-pink-500/20 dark:from-red-500/30 dark:to-pink-500/30 flex items-center justify-center">
+          <svg
+            className="w-6 h-6 text-red-600 dark:text-red-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17 7L7 17M7 7L17 17"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      ),
     },
     {
       title: "Privacy-First Design",
       description:
         "Your code never leaves your machine. All operations run locally with optional privacy mode for sensitive projects.",
-      icon: "🔒",
+      icon: (
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 dark:from-indigo-500/30 dark:to-violet-500/30 flex items-center justify-center">
+          <svg
+            className="w-6 h-6 text-indigo-600 dark:text-indigo-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 14.5V16.5M7 10.0288C7.47142 10.0288 7.91906 9.827 8.23357 9.47276L12 5.5L15.7664 9.47276C16.0809 9.827 16.5286 10.0288 17 10.0288C18.1046 10.0288 19 9.13338 19 8.02881V7.5L15.2336 3.52724C14.9191 3.173 14.4714 2.97119 14 2.97119H10C9.52858 2.97119 9.08094 3.173 8.76643 3.52724L5 7.5V8.02881C5 9.13338 5.89543 10.0288 7 10.0288ZM12 16.5C5.5 16.5 5.5 21 5.5 21H18.5C18.5 21 18.5 16.5 12 16.5Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      ),
     },
     {
       title: "Native VS Code Integration",
       description:
         "Powerful AI assistance right in your editor, with native commands and keyboard shortcuts you already know.",
-      icon: "⚡",
+      icon: (
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-teal-500/20 dark:from-cyan-500/30 dark:to-teal-500/30 flex items-center justify-center">
+          <svg
+            className="w-6 h-6 text-cyan-600 dark:text-cyan-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 12V18.967C3 19.907 3.93967 20.5439 4.8 20.1L11.4 17.1M3 12V5.033C3 4.093 3.93967 3.45612 4.8 3.9L11.4 6.9M3 12L11.4 15M11.4 15L21 19.5M11.4 15L21 10.5M21 19.5V4.5L11.4 9M21 19.5L11.4 6.9"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      ),
     },
   ];
 
@@ -399,17 +504,21 @@ export default function TraycerLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
+                className="group p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
               >
-                <div className="text-5xl group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
+                <div className="flex flex-col gap-6">
+                  <div className="transition-transform duration-300">
+                    {feature.icon}
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-bold text-black dark:text-white">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-blue-100/70 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-black dark:text-white">
-                  {feature.title}
-                </h3>
-                <p className="text-lg text-gray-600 dark:text-blue-100/70">
-                  {feature.description}
-                </p>
               </motion.div>
             ))}
           </div>
@@ -731,6 +840,230 @@ export default function TraycerLanding() {
             </motion.div>
           </div>
         </motion.div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+            >
+              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
+                10k+
+              </div>
+              <div className="text-gray-600 dark:text-blue-100/70">
+                Active Users
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+            >
+              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
+                1M+
+              </div>
+              <div className="text-gray-600 dark:text-blue-100/70">
+                Lines Enhanced
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+            >
+              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
+                50+
+              </div>
+              <div className="text-gray-600 dark:text-blue-100/70">
+                Languages
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+            >
+              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
+                99%
+              </div>
+              <div className="text-gray-600 dark:text-blue-100/70">
+                Satisfaction
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Integration Showcase */}
+      <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center space-y-8 mb-16"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+            Seamless{" "}
+            <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+              Integrations
+            </span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+            Works with your favorite tools and frameworks
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { name: "VS Code", icon: "vscode.svg" },
+            { name: "GitHub", icon: "github.svg" },
+            { name: "GitLab", icon: "gitlab.svg" },
+            { name: "Bitbucket", icon: "bitbucket.svg" },
+            { name: "React", icon: "react.svg" },
+            { name: "Vue", icon: "vue.svg" },
+            { name: "Angular", icon: "angular.svg" },
+            { name: "Node.js", icon: "nodejs.svg" },
+          ].map((tool, index) => (
+            <motion.div
+              key={tool.name}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="p-6 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
+            >
+              <div className="aspect-square rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-[#1a2b4b] dark:to-[#0c1b3b] p-4 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 text-gray-600 dark:text-blue-100/70" />
+              </div>
+              <div className="mt-4 text-center font-medium text-gray-900 dark:text-white">
+                {tool.name}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Community Section */}
+      <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center space-y-8 mb-16"
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+              Join Our{" "}
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                Community
+              </span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+              Connect with developers worldwide and share your experience
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 text-center space-y-6"
+            >
+              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center text-white">
+                <FaDiscord className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-black dark:text-white">
+                Discord Community
+              </h3>
+              <p className="text-gray-600 dark:text-blue-100/70">
+                Join our Discord server to chat with other developers and get
+                help
+              </p>
+              <motion.a
+                href="https://discord.gg/traycer"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block px-6 py-3 rounded-xl bg-black dark:bg-blue-500 text-white font-medium transition-all duration-300"
+              >
+                Join Discord
+              </motion.a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 text-center space-y-6"
+            >
+              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center text-white">
+                <FaGithub className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-black dark:text-white">
+                GitHub
+              </h3>
+              <p className="text-gray-600 dark:text-blue-100/70">
+                Star us on GitHub and contribute to our open-source projects
+              </p>
+              <motion.a
+                href="https://github.com/traycer"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block px-6 py-3 rounded-xl bg-black dark:bg-blue-500 text-white font-medium transition-all duration-300"
+              >
+                View GitHub
+              </motion.a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 text-center space-y-6"
+            >
+              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center text-white">
+                <FaTwitter className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-black dark:text-white">
+                Twitter
+              </h3>
+              <p className="text-gray-600 dark:text-blue-100/70">
+                Follow us on Twitter for the latest updates and tips
+              </p>
+              <motion.a
+                href="https://twitter.com/traycerAI"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block px-6 py-3 rounded-xl bg-black dark:bg-blue-500 text-white font-medium transition-all duration-300"
+              >
+                Follow Us
+              </motion.a>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       <footer className="border-t border-gray-200/50 dark:border-[#1a2b4b]/50 transition-colors duration-300 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm">
