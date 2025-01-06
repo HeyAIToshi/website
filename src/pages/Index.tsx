@@ -228,7 +228,7 @@ export default function TraycerLanding() {
         </div>
 
         {/* Navbar */}
-        <nav className="flex items-center justify-between p-3 sm:p-4 md:p-6 max-w-7xl mx-auto w-full z-10 backdrop-blur-sm bg-white/50 dark:bg-[#0c1b3b]/10 rounded-xl sm:rounded-2xl my-2 sm:my-4 border border-gray-200/50 dark:border-[#1a2b4b]/50">
+        <nav className="flex items-center justify-between p-1 sm:p-2 md:p-3 max-w-7xl mx-auto w-full z-10 backdrop-blur-sm bg-white/50 dark:bg-[#0c1b3b]/10 rounded-xl sm:rounded-2xl my-2 sm:my-4 border border-gray-200/70 dark:border-[#1a2b4b]/70 shadow-lg shadow-black/[0.08] dark:shadow-blue-500/[0.08]">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -238,7 +238,7 @@ export default function TraycerLanding() {
               traycer
             </span>
           </motion.div>
-          <div className="hidden md:flex items-center gap-6 text-sm text-gray-600 dark:text-blue-100/70">
+          <div className="hidden md:flex items-center gap-12 text-sm text-gray-600 dark:text-blue-100/70">
             <a
               href="#"
               className="hover:text-black dark:hover:text-white transition-colors"
@@ -290,7 +290,7 @@ export default function TraycerLanding() {
         </nav>
 
         {/* Hero Section */}
-        <div className="relative z-10 text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 pt-6 sm:pt-10 px-4">
+        <div className="relative z-10 text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 pt-6 pb-4 sm:pb-8 sm:pt-10 px-4">
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
