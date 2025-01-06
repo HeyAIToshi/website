@@ -9,6 +9,7 @@ import { Highlight, themes } from "prism-react-renderer";
 import { useTheme } from "next-themes";
 import { PlayIcon, LoaderCircle } from "lucide-react";
 import { HoverVideoPlayer } from "@/components/ui/video-card";
+import { useState } from "react";
 
 const container = {
   hidden: { opacity: 0 },
@@ -27,6 +28,11 @@ const item = {
 
 export default function TraycerLanding() {
   const { theme } = useTheme();
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
 
   const features = [
     {
@@ -217,14 +223,14 @@ export default function TraycerLanding() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-[#020817] transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-black transition-colors duration-300">
       <main className="flex-1 flex flex-col items-center justify-center p-1 sm:p-4 relative overflow-hidden">
         {/* Enhanced Background gradients */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-white dark:from-[#0c1b3b] dark:via-[#0a1429] dark:to-[#020817]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.15),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(1,65,255,0.2),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0)_0%,rgba(255,255,255,0.8)_100%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.4)_100%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-white dark:from-black dark:via-[#0a0a0a] dark:to-black" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.1),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(1,65,255,0.15),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0)_0%,rgba(255,255,255,0.8)_100%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_100%)]" />
           {/* Add animated gradient orbs */}
           <motion.div
             className="absolute top-1/4 -left-48 w-96 h-96 bg-gradient-to-r from-blue-400/30 to-purple-400/30 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full blur-3xl"
@@ -255,7 +261,7 @@ export default function TraycerLanding() {
         </div>
 
         {/* Enhanced Navbar */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-1 sm:p-2 md:p-3 max-w-7xl mx-auto w-full backdrop-blur-sm bg-white/50 dark:bg-[#0c1b3b]/10 rounded-xl sm:rounded-2xl my-2 sm:my-4 border border-gray-200/70 dark:border-[#1a2b4b]/70 shadow-lg shadow-black/[0.08] dark:shadow-blue-500/[0.08]">
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-2 sm:px-4 md:px-6 p-1 sm:p-2 md:p-3 max-w-6xl mx-auto w-full backdrop-blur-lg bg-white/50 dark:bg-black/50 rounded-xl sm:rounded-2xl my-2 sm:my-4 border border-gray-200/70 dark:border-blue-500/20 shadow-lg shadow-black/[0.08] dark:shadow-blue-500/[0.08]">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -370,7 +376,7 @@ export default function TraycerLanding() {
               Transform Your Code{" "}
               <span className="relative">
                 <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 blur" />
-                <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                   With AI Magic
                 </span>
               </span>
@@ -396,7 +402,7 @@ export default function TraycerLanding() {
               href="vscode:extension/cursor.cursor"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+              className="group relative px-8 py-4 rounded-xl bg-black dark:bg-blue-600 text-white text-lg font-medium transition-all duration-300 flex items-center gap-2 shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
             >
               <span className="relative z-10">Install Now - It's Free</span>
               <HiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
@@ -480,7 +486,7 @@ export default function TraycerLanding() {
             >
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white leading-tight">
                 Transform Your Codebase <br />
-                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                   with AI
                 </span>
               </h2>
@@ -521,7 +527,7 @@ export default function TraycerLanding() {
             >
               <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white leading-tight">
                 Real-Time <br />
-                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                   Code Reviews
                 </span>
               </h2>
@@ -564,26 +570,14 @@ export default function TraycerLanding() {
         </div>
 
         {/* Statistics Section */}
-        <section className="py-16 sm:py-24 w-full backdrop-blur-sm relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.15),transparent_50%)]" />
+        <section className="py-16 sm:py-24 w-full backdrop-blur-sm bg-white/50 dark:bg-black/50 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-black dark:via-[#0a0a0a] dark:to-black" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.1),transparent_50%)]" />
 
           <div className="max-w-7xl mx-auto px-4 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                whileHover={{ y: -5 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <motion.div className="p-8 rounded-2xl bg-white/50 dark:bg-black/80 backdrop-blur-sm border border-gray-200/50 dark:border-blue-500/20 hover:border-black/50 dark:hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300 group relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/10 dark:to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <motion.div
                   className="relative z-10"
                   initial={{ opacity: 0, y: 20 }}
@@ -605,9 +599,9 @@ export default function TraycerLanding() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
                 whileHover={{ y: -5 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
+                className="p-8 rounded-2xl bg-white/50 dark:bg-black/80 backdrop-blur-sm border border-gray-200/50 dark:border-blue-500/20 hover:border-black/50 dark:hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 dark:from-green-500/20 dark:to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 dark:from-green-500/10 dark:to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <motion.div
                   className="relative z-10"
                   initial={{ opacity: 0, y: 20 }}
@@ -629,9 +623,9 @@ export default function TraycerLanding() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
                 whileHover={{ y: -5 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
+                className="p-8 rounded-2xl bg-white/50 dark:bg-black/80 backdrop-blur-sm border border-gray-200/50 dark:border-blue-500/20 hover:border-black/50 dark:hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 dark:from-yellow-500/20 dark:to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 dark:from-yellow-500/10 dark:to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <motion.div
                   className="relative z-10"
                   initial={{ opacity: 0, y: 20 }}
@@ -653,9 +647,9 @@ export default function TraycerLanding() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
                 whileHover={{ y: -5 }}
-                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
+                className="p-8 rounded-2xl bg-white/50 dark:bg-black/80 backdrop-blur-sm border border-gray-200/50 dark:border-blue-500/20 hover:border-black/50 dark:hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-500/10 dark:from-red-500/20 dark:to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-500/10 dark:from-red-500/10 dark:to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <motion.div
                   className="relative z-10"
                   initial={{ opacity: 0, y: 20 }}
@@ -699,7 +693,7 @@ export default function TraycerLanding() {
               Everything You Need to{" "}
               <span className="relative">
                 <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 blur" />
-                <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                   Code Faster
                 </span>
               </span>
@@ -718,35 +712,17 @@ export default function TraycerLanding() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="group p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+                className="group p-8 rounded-2xl border border-gray-200/50 dark:border-blue-500/20 bg-white/50 dark:bg-black/80 backdrop-blur-sm hover:border-black/50 dark:hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300"
               >
                 <div className="flex flex-col gap-6">
-                  <motion.div
-                    className="transition-transform duration-300 group-hover:scale-110"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 + 0.2 }}
-                  >
+                  <motion.div className="transition-transform duration-300">
                     {feature.icon}
                   </motion.div>
                   <div className="space-y-3">
-                    <motion.h3
-                      className="text-xl font-bold text-black dark:text-white"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.3 }}
-                    >
+                    <motion.h3 className="text-xl font-bold text-black dark:text-white">
                       {feature.title}
                     </motion.h3>
-                    <motion.p
-                      className="text-gray-600 dark:text-blue-100/70 leading-relaxed"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.4 }}
-                    >
+                    <motion.p className="text-gray-600 dark:text-blue-100/70 leading-relaxed">
                       {feature.description}
                     </motion.p>
                   </div>
@@ -786,7 +762,7 @@ export default function TraycerLanding() {
                   transition={{ delay: 0.2 }}
                 >
                   AI-Powered Code Reviews{" "}
-                  <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                  <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                     in Real-Time
                   </span>
                 </motion.h3>
@@ -855,7 +831,7 @@ export default function TraycerLanding() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm relative">
+        <section className="py-16 sm:py-32 w-full backdrop-blur-sm bg-white/50 dark:bg-black/50 relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.15),transparent_50%)]" />
           <div className="max-w-7xl mx-auto px-4 relative z-10">
             <motion.div
@@ -877,7 +853,7 @@ export default function TraycerLanding() {
                 Loved by{" "}
                 <span className="relative">
                   <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 blur" />
-                  <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                  <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                     Developers
                   </span>
                 </span>
@@ -896,20 +872,14 @@ export default function TraycerLanding() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
-                  className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm shadow-xl shadow-black/5 dark:shadow-blue-500/5 border border-gray-200/50 dark:border-[#1a2b4b]/50 space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group relative overflow-hidden"
+                  className="p-8 rounded-2xl bg-white/50 dark:bg-black/80 backdrop-blur-sm shadow-xl shadow-black/5 dark:shadow-blue-500/10 border border-gray-200/50 dark:border-blue-500/20 space-y-6 hover:border-black/50 dark:hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300 group relative overflow-hidden"
                 >
                   {/* Background Gradients */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/10 dark:to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(1,65,255,0.2),transparent_50%)]" />
 
                   <div className="relative z-10">
-                    <motion.div
-                      className="flex items-center gap-1 text-yellow-500 dark:text-yellow-400 mb-6"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.2 }}
-                    >
+                    <motion.div className="flex items-center gap-1 text-yellow-500 dark:text-yellow-400 mb-6">
                       {[...Array(5)].map((_, i) => (
                         <svg
                           key={i}
@@ -920,13 +890,7 @@ export default function TraycerLanding() {
                         </svg>
                       ))}
                     </motion.div>
-                    <motion.p
-                      className="text-lg text-gray-600 dark:text-blue-100/70 italic leading-relaxed relative"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.3 }}
-                    >
+                    <motion.p className="text-lg text-gray-600 dark:text-blue-100/70 italic leading-relaxed relative">
                       <span className="absolute -top-4 -left-2 text-4xl text-black/10 dark:text-blue-500/20">
                         "
                       </span>
@@ -935,13 +899,7 @@ export default function TraycerLanding() {
                         "
                       </span>
                     </motion.p>
-                    <motion.div
-                      className="flex items-center gap-4 mt-8"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.4 }}
-                    >
+                    <motion.div className="flex items-center gap-4 mt-8">
                       <div className="h-12 w-12 rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 shadow-lg shadow-black/20 dark:shadow-blue-500/20 flex items-center justify-center text-white dark:text-blue-100 font-medium text-lg">
                         {testimonial.author[0]}
                       </div>
@@ -1007,7 +965,7 @@ export default function TraycerLanding() {
             >
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
                 Get Started in{" "}
-                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                   Seconds
                 </span>
               </h2>
@@ -1045,7 +1003,7 @@ export default function TraycerLanding() {
                 href="vscode:extension/cursor.cursor"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-black dark:bg-blue-600 text-white text-lg font-medium transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
               >
                 <span className="relative z-10">Install Free Extension</span>
                 <HiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
@@ -1067,7 +1025,7 @@ export default function TraycerLanding() {
           >
             <h2 className="relative z-10 text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
               Simple,{" "}
-              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                 Transparent
               </span>{" "}
               Pricing
@@ -1234,7 +1192,7 @@ export default function TraycerLanding() {
           >
             <h2 className="relative z-10 text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
               Frequently Asked{" "}
-              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
                 Questions
               </span>
             </h2>
@@ -1242,19 +1200,60 @@ export default function TraycerLanding() {
               Everything you need to know about Traycer
             </p>
 
-            <div className="grid gap-8 max-w-3xl mx-auto">
+            <div className="grid gap-4 max-w-3xl mx-auto">
               {faqs.map((faq, index) => (
                 <motion.div
                   key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-4 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+                  className="overflow-hidden rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
                 >
-                  <h3 className="text-2xl font-bold text-black dark:text-white">
-                    {faq.question}
-                  </h3>
-                  <p className="text-lg text-gray-600 dark:text-blue-100/70 leading-relaxed">
-                    {faq.answer}
-                  </p>
+                  <motion.button
+                    onClick={() => toggleFaq(index)}
+                    className="flex items-center justify-between w-full p-6 text-left"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                  >
+                    <h3 className="text-xl font-semibold text-black dark:text-white">
+                      {faq.question}
+                    </h3>
+                    <motion.div
+                      animate={{ rotate: openFaqIndex === index ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex-shrink-0 ml-4"
+                    >
+                      <svg
+                        className="w-6 h-6 text-gray-600 dark:text-blue-100/70"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </motion.div>
+                  </motion.button>
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: openFaqIndex === index ? "auto" : 0,
+                      opacity: openFaqIndex === index ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-6 pt-0 text-left">
+                      <p className="text-lg text-gray-600 dark:text-blue-100/70 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>
@@ -1262,7 +1261,7 @@ export default function TraycerLanding() {
         </section>
       </main>
 
-      <footer className="border-t border-gray-200/50 dark:border-[#1a2b4b]/50 transition-colors duration-300 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm">
+      <footer className="border-t border-gray-200/50 dark:border-blue-500/20 transition-colors duration-300 bg-white/50 dark:bg-black/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-8 sm:py-16">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12">
             <motion.div
