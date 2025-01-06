@@ -476,7 +476,7 @@ export default function TraycerLanding() {
         </div>
 
         {/* Statistics Section */}
-        <section className="py-4 sm:py-8 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
+        <section className="py-4 sm:py-8 w-full backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
