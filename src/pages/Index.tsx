@@ -380,7 +380,7 @@ export default function TraycerLanding() {
         </div>
 
         {/* Video Sections */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-16 sm:py-24 space-y-24 sm:space-y-32">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:pb-16 sm:pt-24 space-y-24 sm:space-y-32">
           {/* Tasks Video Section */}
           <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
             <motion.div
@@ -477,8 +477,77 @@ export default function TraycerLanding() {
           </div>
         </div>
 
+        {/* Statistics Section */}
+        <section className="py-4 sm:py-8 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+              >
+                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
+                  10k+
+                </div>
+                <div className="text-gray-600 dark:text-blue-100/70">
+                  Active Users
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+              >
+                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
+                  1M+
+                </div>
+                <div className="text-gray-600 dark:text-blue-100/70">
+                  Lines Enhanced
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+              >
+                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
+                  50+
+                </div>
+                <div className="text-gray-600 dark:text-blue-100/70">
+                  Languages
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+              >
+                <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
+                  100%
+                </div>
+                <div className="text-gray-600 dark:text-blue-100/70">
+                  Satisfaction
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Features Grid */}
-        <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4 relative z-10">
+        <section className="py-4 sm:py-8 w-full max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -525,8 +594,57 @@ export default function TraycerLanding() {
         </section>
       </main>
 
+      {/* Integration Showcase */}
+      <section className="py-4 sm:py-8 w-full max-w-7xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center space-y-8 mb-16"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+            Seamless{" "}
+            <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+              Integrations
+            </span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+            Works with your favorite tools and frameworks
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { name: "VS Code", icon: "vscode.svg" },
+            { name: "GitHub", icon: "github.svg" },
+            { name: "GitLab", icon: "gitlab.svg" },
+            { name: "Bitbucket", icon: "bitbucket.svg" },
+            { name: "React", icon: "react.svg" },
+            { name: "Vue", icon: "vue.svg" },
+            { name: "Angular", icon: "angular.svg" },
+            { name: "Node.js", icon: "nodejs.svg" },
+          ].map((tool, index) => (
+            <motion.div
+              key={tool.name}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="p-6 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
+            >
+              <div className="aspect-square rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-[#1a2b4b] dark:to-[#0c1b3b] p-4 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 text-gray-600 dark:text-blue-100/70" />
+              </div>
+              <div className="mt-4 text-center font-medium text-gray-900 dark:text-white">
+                {tool.name}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Testimonials */}
-      <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
+      <section className="py-8 sm:py-16 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -572,46 +690,6 @@ export default function TraycerLanding() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center space-y-6 mb-24"
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-            Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-              Questions
-            </span>
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-            Everything you need to know about Traycer
-          </p>
-        </motion.div>
-
-        <div className="grid gap-8 max-w-3xl mx-auto">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-4 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
-            >
-              <h3 className="text-2xl font-bold text-black dark:text-white">
-                {faq.question}
-              </h3>
-              <p className="text-lg text-gray-600 dark:text-blue-100/70 leading-relaxed">
-                {faq.answer}
-              </p>
-            </motion.div>
-          ))}
         </div>
       </section>
 
@@ -842,230 +920,45 @@ export default function TraycerLanding() {
         </motion.div>
       </section>
 
-      {/* Statistics Section */}
-      <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
-            >
-              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
-                10k+
-              </div>
-              <div className="text-gray-600 dark:text-blue-100/70">
-                Active Users
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
-            >
-              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
-                1M+
-              </div>
-              <div className="text-gray-600 dark:text-blue-100/70">
-                Lines Enhanced
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
-            >
-              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
-                50+
-              </div>
-              <div className="text-gray-600 dark:text-blue-100/70">
-                Languages
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
-            >
-              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text mb-2">
-                99%
-              </div>
-              <div className="text-gray-600 dark:text-blue-100/70">
-                Satisfaction
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Integration Showcase */}
+      {/* FAQ Section */}
       <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center space-y-8 mb-16"
+          className="text-center space-y-6 mb-24"
         >
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-            Seamless{" "}
+            Frequently Asked{" "}
             <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-              Integrations
+              Questions
             </span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-            Works with your favorite tools and frameworks
+            Everything you need to know about Traycer
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { name: "VS Code", icon: "vscode.svg" },
-            { name: "GitHub", icon: "github.svg" },
-            { name: "GitLab", icon: "gitlab.svg" },
-            { name: "Bitbucket", icon: "bitbucket.svg" },
-            { name: "React", icon: "react.svg" },
-            { name: "Vue", icon: "vue.svg" },
-            { name: "Angular", icon: "angular.svg" },
-            { name: "Node.js", icon: "nodejs.svg" },
-          ].map((tool, index) => (
+        <div className="grid gap-8 max-w-3xl mx-auto">
+          {faqs.map((faq, index) => (
             <motion.div
-              key={tool.name}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="p-6 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
+              className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-4 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
             >
-              <div className="aspect-square rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-[#1a2b4b] dark:to-[#0c1b3b] p-4 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                <div className="w-12 h-12 text-gray-600 dark:text-blue-100/70" />
-              </div>
-              <div className="mt-4 text-center font-medium text-gray-900 dark:text-white">
-                {tool.name}
-              </div>
+              <h3 className="text-2xl font-bold text-black dark:text-white">
+                {faq.question}
+              </h3>
+              <p className="text-lg text-gray-600 dark:text-blue-100/70 leading-relaxed">
+                {faq.answer}
+              </p>
             </motion.div>
           ))}
         </div>
       </section>
-
-      {/* Community Section */}
-      <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center space-y-8 mb-16"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
-              Join Our{" "}
-              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
-                Community
-              </span>
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-              Connect with developers worldwide and share your experience
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 text-center space-y-6"
-            >
-              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center text-white">
-                <FaDiscord className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">
-                Discord Community
-              </h3>
-              <p className="text-gray-600 dark:text-blue-100/70">
-                Join our Discord server to chat with other developers and get
-                help
-              </p>
-              <motion.a
-                href="https://discord.gg/traycer"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block px-6 py-3 rounded-xl bg-black dark:bg-blue-500 text-white font-medium transition-all duration-300"
-              >
-                Join Discord
-              </motion.a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 text-center space-y-6"
-            >
-              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center text-white">
-                <FaGithub className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">
-                GitHub
-              </h3>
-              <p className="text-gray-600 dark:text-blue-100/70">
-                Star us on GitHub and contribute to our open-source projects
-              </p>
-              <motion.a
-                href="https://github.com/traycer"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block px-6 py-3 rounded-xl bg-black dark:bg-blue-500 text-white font-medium transition-all duration-300"
-              >
-                View GitHub
-              </motion.a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 text-center space-y-6"
-            >
-              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center text-white">
-                <FaTwitter className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-black dark:text-white">
-                Twitter
-              </h3>
-              <p className="text-gray-600 dark:text-blue-100/70">
-                Follow us on Twitter for the latest updates and tips
-              </p>
-              <motion.a
-                href="https://twitter.com/traycerAI"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block px-6 py-3 rounded-xl bg-black dark:bg-blue-500 text-white font-medium transition-all duration-300"
-              >
-                Follow Us
-              </motion.a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       <footer className="border-t border-gray-200/50 dark:border-[#1a2b4b]/50 transition-colors duration-300 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-8 sm:py-16">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12">
