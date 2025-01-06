@@ -1,10 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
-import { HiArrowRight } from "react-icons/hi2";
+import { HiArrowRight, HiCheck } from "react-icons/hi2";
+import { FaGithub, FaDiscord, FaTwitter } from "react-icons/fa";
 import { cn } from "@/lib/utils";
+
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Highlight, themes } from "prism-react-renderer";
 import { useTheme } from "next-themes";
+import { PlayIcon, LoaderCircle } from "lucide-react";
+import { HoverVideoPlayer } from "@/components/ui/video-card";
 
 const container = {
   hidden: { opacity: 0 },
@@ -21,403 +25,806 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
-export default function LeapflowLanding() {
+export default function TraycerLanding() {
   const { theme } = useTheme();
+
+  const features = [
+    {
+      title: "AI-Powered Code Changes",
+      description:
+        "Transform your codebase with AI that plans, implements, and reviews complex changes in minutes, not hours.",
+      icon: "🤖",
+    },
+    {
+      title: "Instant Code Reviews",
+      description:
+        "Get real-time, context-aware feedback that catches issues before they reach production, like having a senior engineer by your side.",
+      icon: "👀",
+    },
+    {
+      title: "Simple Natural Language Commands",
+      description:
+        "Just describe what you want to change in plain English - Traycer handles the rest with precision and care.",
+      icon: "💬",
+    },
+    {
+      title: "Works With Your Stack",
+      description:
+        "Seamlessly supports all major languages and frameworks, adapting to your codebase's patterns and conventions.",
+      icon: "🌐",
+    },
+    {
+      title: "Privacy-First Design",
+      description:
+        "Your code never leaves your machine. All operations run locally with optional privacy mode for sensitive projects.",
+      icon: "🔒",
+    },
+    {
+      title: "Native VS Code Integration",
+      description:
+        "Powerful AI assistance right in your editor, with native commands and keyboard shortcuts you already know.",
+      icon: "⚡",
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote:
+        "Traycer is like having a 10x engineer on your team. What used to take days of refactoring now takes minutes.",
+      author: "Sarah Chen",
+      role: "Engineering Lead at TechCorp",
+    },
+    {
+      quote:
+        "The real-time code reviews have caught countless issues before they hit production. It's transformed how our team writes code.",
+      author: "Michael Rodriguez",
+      role: "Senior Developer at StartupX",
+    },
+    {
+      quote:
+        "Being able to describe changes in plain English and have them automatically implemented has doubled our team's productivity.",
+      author: "Emily Johnson",
+      role: "CTO at DevTools Inc",
+    },
+  ];
+
+  const faqs = [
+    {
+      question: "How does Traycer work?",
+      answer:
+        "Traycer uses advanced AI to understand your codebase and implement changes. Simply describe what you want to change in natural language, and Traycer handles the rest - from planning to implementation to review.",
+    },
+    {
+      question: "Is my code secure?",
+      answer:
+        "Absolutely! Traycer runs 100% locally on your machine and never sends your code to external servers. For sensitive projects, you can enable privacy mode which ensures complete isolation.",
+    },
+    {
+      question: "What languages and frameworks are supported?",
+      answer:
+        "Traycer works with all major programming languages and frameworks including JavaScript/TypeScript, Python, Java, Go, Ruby, and more. It automatically adapts to your codebase's specific patterns.",
+    },
+    {
+      question: "Can I try it for free?",
+      answer:
+        "Yes! Start with our free tier which includes unlimited usage for open-source projects. No credit card required. For commercial use, we offer a 14-day free trial of our Pro features.",
+    },
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-neutral-950 transition-colors duration-300">
-      <main className="flex-1 flex flex-col items-center justify-center p-1 relative overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-[#020817] transition-colors duration-300">
+      <main className="flex-1 flex flex-col items-center justify-center p-1 sm:p-4 relative overflow-hidden">
+        {/* Background gradients */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-white dark:from-[#0c1b3b] dark:via-[#0a1429] dark:to-[#020817]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(1,65,255,0.1),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(1,65,255,0.15),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0)_0%,rgba(255,255,255,0.8)_100%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.4)_100%)]" />
+        </div>
+
         {/* Navbar */}
-        <nav className="flex items-center justify-between p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full z-10">
+        <nav className="flex items-center justify-between p-3 sm:p-4 md:p-6 max-w-7xl mx-auto w-full z-10 backdrop-blur-sm bg-white/50 dark:bg-[#0c1b3b]/10 rounded-xl sm:rounded-2xl my-2 sm:my-4 border border-gray-200/50 dark:border-[#1a2b4b]/50">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 w-[120px]"
           >
-            <div className="h-6 w-6 md:h-8 md:w-8 rounded-lg bg-gradient-to-br from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-300" />
-            <span className="font-semibold text-lg md:text-xl text-neutral-900 dark:text-white">
-              leapflow
+            <span className="font-semibold text-lg md:text-xl text-black dark:text-white">
+              traycer
             </span>
           </motion.div>
-          <div className="hidden md:flex items-center gap-4 lg:gap-8 text-sm text-neutral-600 dark:text-neutral-400">
+          <div className="hidden md:flex items-center gap-6 text-sm text-gray-600 dark:text-blue-100/70">
             <a
               href="#"
-              className="hover:text-neutral-900 dark:hover:text-white transition-colors"
+              className="hover:text-black dark:hover:text-white transition-colors"
             >
-              Documentation
+              Capabilities
             </a>
             <a
               href="#"
-              className="hover:text-neutral-900 dark:hover:text-white transition-colors"
-            >
-              Examples
-            </a>
-            <a
-              href="#"
-              className="hover:text-neutral-900 dark:hover:text-white transition-colors"
+              className="hover:text-black dark:hover:text-white transition-colors"
             >
               Pricing
             </a>
+            <a
+              href="#"
+              className="hover:text-black dark:hover:text-white transition-colors"
+            >
+              FAQ
+            </a>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 w-[120px] justify-end">
             <ThemeToggle />
-            <motion.button
+            <motion.a
+              href="#"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
+              className="px-4 py-2 rounded-lg bg-black/5 dark:bg-blue-500/20 text-black dark:text-blue-100 text-sm font-medium hover:bg-black/10 dark:hover:bg-blue-500/30 transition-colors border border-black/10 dark:border-blue-500/30"
             >
-              Get Started
-            </motion.button>
+              Login
+            </motion.a>
+          </div>
+          <div className="flex md:hidden items-center">
+            <button className="p-2 text-gray-600 dark:text-blue-100/70 hover:text-black dark:hover:text-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
           </div>
         </nav>
 
         {/* Hero Section */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent dark:via-neutral-950" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="relative z-10 text-center max-w-4xl mx-auto space-y-8"
-        >
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-neutral-900 dark:text-white">
-            Build web apps with just <br className="hidden sm:block" />
-            <span className="bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 dark:from-white dark:via-neutral-200 dark:to-white text-transparent bg-clip-text">
-              {" "}
-              backend code
-            </span>
-          </h1>
-
-          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto px-4">
-            Leapflow turns your Node.js into a full app, no frontend needed.
-            Write your Node.js logic and let Leapflow handle the app for you.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors flex items-center gap-2 group w-full sm:w-auto justify-center"
-            >
-              Get Started
-              <HiArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 rounded-lg border border-neutral-200 dark:border-neutral-800 font-medium hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors w-full sm:w-auto text-neutral-900 dark:text-white"
-            >
-              View Documentation
-            </motion.button>
-          </div>
-        </motion.div>
-
-        {/* Code Preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="relative z-10 mt-10 w-full max-w-3xl mx-auto rounded-lg overflow-hidden shadow-2xl bg-neutral-100/50 dark:bg-neutral-900/50 backdrop-blur-sm"
-        >
-          <div className="bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-white px-4 py-3 text-sm flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
-            <span className="font-medium">app.js</span>
-            <div className="flex gap-2">
-              <div className="h-3 w-3 rounded-full bg-red-500/90" />
-              <div className="h-3 w-3 rounded-full bg-yellow-500/90" />
-              <div className="h-3 w-3 rounded-full bg-green-500/90" />
+        <div className="relative z-10 text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 pt-6 sm:pt-10 px-4">
+          <motion.div
+            className="space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="flex items-center justify-center gap-2 text-sm">
+              <span className="px-3 py-1 rounded-full bg-black/5 dark:bg-blue-500/20 text-black dark:text-blue-100 font-medium border border-black/10 dark:border-blue-500/30">
+                New Release
+              </span>
+              <span className="text-gray-600 dark:text-blue-100/70">
+                Introducing AI-powered code reviews →
+              </span>
             </div>
-          </div>
-          <div className="text-sm font-mono overflow-x-auto">
-            <Highlight
-              theme={theme === "dark" ? themes.dracula : themes.github}
-              code={`const { createApp } = require('leapflow');
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-black dark:text-white">
+              Transform Your Code <br />
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                With AI Magic
+              </span>
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-blue-100/70 max-w-3xl mx-auto">
+              Experience the future of coding with Traycer. Write better code
+              faster, catch bugs earlier, and let AI handle the heavy lifting.
+            </p>
+          </motion.div>
 
-const app = createApp();
-
-app.get('/users', async (req, res) => {
-  const users = await db.users.findAll();
-  return users; // Leapflow automatically creates UI
-});
-
-app.post('/users', async (req, res) => {
-  const user = await db.users.create(req.body);
-  return user;
-});
-
-app.start(3000);`}
-              language="javascript"
+          <motion.div
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <motion.a
+              href="vscode:extension/cursor.cursor"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-black dark:bg-blue-500 text-white text-base sm:text-lg font-medium transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
             >
-              {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre
-                  className={cn(
-                    className,
-                    "p-4 sm:p-6 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent"
-                  )}
+              <span className="relative z-10">Install Now - It's Free</span>
+              <HiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
+            </motion.a>
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group px-8 py-4 rounded-xl text-black dark:text-white text-lg font-medium transition-all duration-300 flex items-center gap-2 border-2 border-black/10 dark:border-blue-500/30 hover:border-black/30 dark:hover:border-blue-500/50"
+            >
+              <PlayIcon className="w-5 h-5" />
+              Watch Demo
+            </motion.a>
+          </motion.div>
+
+          <motion.div
+            className="pt-8 flex flex-col items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-blue-100/70">
+              <div className="flex items-center gap-2">
+                <HiCheck className="text-black dark:text-blue-400" />
+                <span>100% Free for Open Source</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <HiCheck className="text-black dark:text-blue-400" />
+                <span>No Credit Card Required</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <HiCheck className="text-black dark:text-blue-400" />
+                <span>Works Offline</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-blue-100/70">
+              <div className="flex -space-x-2">
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-blue-400 dark:to-blue-600 border-2 border-white dark:border-[#020817]"
+                  />
+                ))}
+              </div>
+              <p>Trusted by 10,000+ developers</p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Video Sections */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-16 sm:py-24 space-y-24 sm:space-y-32">
+          {/* Tasks Video Section */}
+          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
+            <motion.div
+              className="flex-1 space-y-6"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white leading-tight">
+                Transform Your Codebase <br />
+                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                  with AI
+                </span>
+              </h2>
+              <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+                Just describe what you want to change in plain English. Traycer
+                handles complex refactoring, migrations, and codebase-wide
+                changes with confidence.
+              </p>
+            </motion.div>
+            <motion.div
+              className="flex-1 rounded-2xl overflow-hidden shadow-2xl shadow-black/5 dark:shadow-blue-500/10 border border-gray-200/50 dark:border-[#1a2b4b]/50 relative group hover:shadow-2xl hover:shadow-black/10 dark:hover:shadow-blue-500/20 transition-all duration-300"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-black/5 to-transparent dark:from-blue-500/20 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative w-full h-full overflow-hidden">
+                <img
+                  src="/task.gif"
+                  alt="Task demonstration"
+                  className="w-full h-full object-cover object-center transform group-hover:scale-[1.02] transition-transform duration-300"
                   style={{
-                    ...style,
-                    background: "transparent",
+                    aspectRatio: "16/9",
                   }}
-                >
-                  {tokens.map((line, i) => (
-                    <div
-                      key={i}
-                      {...getLineProps({ line })}
-                      style={{
-                        ...getLineProps({ line }).style,
-                        lineHeight: "1.75",
-                      }}
-                    >
-                      {line.map((token, key) => (
-                        <span key={key} {...getTokenProps({ token })} />
-                      ))}
-                    </div>
-                  ))}
-                </pre>
-              )}
-            </Highlight>
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+
+          {/* Review Video Section */}
+          <div className="flex flex-col lg:flex-row-reverse items-center gap-16">
+            <motion.div
+              className="flex-1 space-y-8"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white leading-tight">
+                Real-Time <br />
+                <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                  Code Reviews
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-blue-100/70">
+                Get instant, context-aware feedback as you code. It's like
+                having a senior engineer always watching over your shoulder.
+              </p>
+            </motion.div>
+            <motion.div
+              className="flex-1 rounded-2xl overflow-hidden shadow-2xl shadow-black/5 dark:shadow-blue-500/10 border border-gray-200/50 dark:border-[#1a2b4b]/50 relative group hover:shadow-2xl hover:shadow-black/10 dark:hover:shadow-blue-500/20 transition-all duration-300"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-black/5 to-transparent dark:from-blue-500/20 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <motion.div
+                initial={{ maxWidth: "54rem" }}
+                whileHover={{ maxWidth: "74rem" }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.32, 0.72, 0, 1],
+                }}
+                className="group relative flex flex-col overflow-hidden rounded-lg w-full h-full"
+              >
+                <div className="relative w-full h-full overflow-hidden">
+                  <img
+                    src="/review.gif"
+                    alt="Review demonstration"
+                    className="w-full h-full object-cover object-center transform group-hover:scale-[1.02] transition-transform duration-300"
+                    style={{
+                      aspectRatio: "16/9",
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
 
         {/* Features Grid */}
-        <section className="py-12 md:py-16 lg:py-20 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto z-10 w-full">
+        <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            className="text-center space-y-6 mb-24"
           >
-            {features.map((feature, i) => (
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+              Everything You Need to <br />
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                Code Faster
+              </span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+              Powerful features designed to transform your development workflow
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {features.map((feature, index) => (
               <motion.div
-                key={feature.title}
-                variants={item}
-                className={cn(
-                  "p-6 rounded-xl",
-                  "bg-neutral-50 dark:bg-neutral-900",
-                  "border border-neutral-200 dark:border-neutral-800",
-                  "transition-colors duration-300"
-                )}
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
               >
-                <feature.icon className="h-8 w-8 mb-4 text-neutral-900 dark:text-white" />
-                <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-white">
+                <div className="text-5xl group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-black dark:text-white">
                   {feature.title}
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-400">
+                <p className="text-lg text-gray-600 dark:text-blue-100/70">
                   {feature.description}
                 </p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </section>
       </main>
 
-      <footer className="border-t border-neutral-200 dark:border-neutral-800 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
-            <div>
-              <h4 className="font-semibold mb-4 text-neutral-900 dark:text-white">
-                Product
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Templates
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-neutral-900 dark:text-white">
-                Resources
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Guides
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Examples
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-neutral-900 dark:text-white">
-                Company
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Careers
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-neutral-900 dark:text-white">
-                Legal
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Terms
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    Security
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-2">
-              <div className="h-6 w-6 md:h-8 md:w-8 rounded-lg bg-neutral-900 dark:bg-white" />
-              <span className="font-semibold text-sm md:text-base text-neutral-900 dark:text-white">
-                leapflow
+      {/* Testimonials */}
+      <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center space-y-6 mb-24"
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+              Loved by{" "}
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                Developers
               </span>
-            </div>
-            <p className="text-xs md:text-sm text-neutral-600 dark:text-neutral-400 text-center md:text-left">
-              © 2024 Leapflow. All rights reserved.
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+              See what others are saying about Traycer
             </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-8 rounded-2xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm shadow-xl shadow-black/5 dark:shadow-blue-500/5 border border-gray-200/50 dark:border-[#1a2b4b]/50 space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300 group"
+              >
+                <p className="text-lg text-gray-600 dark:text-blue-100/70 italic leading-relaxed">
+                  "{testimonial.quote}"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 shadow-lg shadow-black/20 dark:shadow-blue-500/20" />
+                  <div>
+                    <p className="font-semibold text-lg text-black dark:text-white">
+                      {testimonial.author}
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-blue-100/70">
+                      {testimonial.role}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center space-y-6 mb-24"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+            Frequently Asked{" "}
+            <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+              Questions
+            </span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+            Everything you need to know about Traycer
+          </p>
+        </motion.div>
+
+        <div className="grid gap-8 max-w-3xl mx-auto">
+          {faqs.map((faq, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-4 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold text-black dark:text-white">
+                {faq.question}
+              </h3>
+              <p className="text-lg text-gray-600 dark:text-blue-100/70 leading-relaxed">
+                {faq.answer}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* VS Code Integration Section */}
+      <section className="py-16 sm:py-32 w-full bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-[#0c1b3b]/50 dark:to-[#020817]/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center space-y-12"
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+              Get Started in{" "}
+              <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                Seconds
+              </span>
+            </h2>
+            <div className="max-w-3xl mx-auto space-y-8">
+              <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+                Install Traycer directly in VS Code and transform how you write
+                code. No complex setup, no configuration needed.
+              </p>
+              <motion.div
+                className="space-y-6 text-lg text-gray-600 dark:text-blue-100/70"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
+                  <HiCheck className="text-2xl text-black dark:text-blue-400" />
+                  <span>One-click installation in VS Code</span>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
+                  <HiCheck className="text-2xl text-black dark:text-blue-400" />
+                  <span>Instant AI assistance with familiar commands</span>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
+                  <HiCheck className="text-2xl text-black dark:text-blue-400" />
+                  <span>Works with your existing shortcuts and workflow</span>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm border border-gray-200/50 dark:border-[#1a2b4b]/50 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300">
+                  <HiCheck className="text-2xl text-black dark:text-blue-400" />
+                  <span>Free to get started - no credit card required</span>
+                </div>
+              </motion.div>
+            </div>
+            <motion.a
+              href="vscode:extension/cursor.cursor"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+            >
+              <span className="relative z-10">Install Free Extension</span>
+              <HiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16 sm:py-32 w-full max-w-7xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center space-y-8"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white">
+            Simple,{" "}
+            <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+              Transparent
+            </span>{" "}
+            Pricing
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
+            Get started free today - no credit card required
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-8">
+            {/* Free Tier */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold text-black dark:text-white">
+                Free
+              </h3>
+              <div className="text-4xl font-bold text-black dark:text-white">
+                $0
+              </div>
+              <p className="text-gray-600 dark:text-blue-100/70">
+                Perfect for open-source development
+              </p>
+              <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>Unlimited open-source usage</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>AI-powered code changes</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>Real-time code reviews</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>5,000 lines/hour limit</span>
+                </li>
+              </ul>
+              <motion.a
+                href="vscode:extension/cursor.cursor"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+              >
+                <span className="relative z-10">Install Now</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
+              </motion.a>
+            </motion.div>
+
+            {/* Pro Tier */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="p-8 rounded-2xl border-2 border-black dark:border-blue-500 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 relative scale-105 shadow-[0_0_50px_rgba(0,0,0,0.2)] dark:shadow-[0_0_50px_rgba(59,130,246,0.3)]"
+            >
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-black to-gray-800 dark:from-blue-500 dark:to-blue-600 text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg shadow-black/20 dark:shadow-blue-500/20">
+                Most Popular
+              </div>
+              <h3 className="text-2xl font-bold text-black dark:text-white">
+                Pro
+              </h3>
+              <div className="text-4xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                $8
+              </div>
+              <p className="text-gray-600 dark:text-blue-100/70">
+                /month (billed annually)
+              </p>
+              <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>Everything in Free</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>Unlimited private repos</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>Priority support</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>12,500 lines/hour limit</span>
+                </li>
+              </ul>
+              <motion.a
+                href="vscode:extension/cursor.cursor"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+              >
+                <span className="relative z-10">Start Free Trial</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
+              </motion.a>
+            </motion.div>
+
+            {/* Business Tier */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="p-8 rounded-2xl border border-gray-200/50 dark:border-[#1a2b4b]/50 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm space-y-6 hover:border-black/50 dark:hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold text-black dark:text-white">
+                Business
+              </h3>
+              <div className="text-4xl font-bold text-black dark:text-white">
+                $16
+              </div>
+              <p className="text-gray-600 dark:text-blue-100/70">
+                /user/month (billed annually)
+              </p>
+              <ul className="space-y-4 text-gray-600 dark:text-blue-100/70">
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>Everything in Pro</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>Team management</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>Enhanced privacy mode</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <HiCheck className="text-black dark:text-blue-400 text-xl" />
+                  <span>25,000 lines/hour/user</span>
+                </li>
+              </ul>
+              <motion.a
+                href="vscode:extension/cursor.cursor"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative w-full px-4 py-3 rounded-xl bg-black dark:bg-blue-500 text-white text-lg font-medium transition-all duration-300 inline-block text-center shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
+              >
+                <span className="relative z-10">Start Free Trial</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
+              </motion.a>
+            </motion.div>
+          </div>
+        </motion.div>
+      </section>
+
+      <footer className="border-t border-gray-200/50 dark:border-[#1a2b4b]/50 transition-colors duration-300 bg-white/50 dark:bg-[#0c1b3b]/30 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:py-16">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12">
+            <motion.div
+              className="flex items-center space-x-3"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="font-semibold text-xl text-black dark:text-white bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-600 text-transparent bg-clip-text">
+                Traycer
+              </span>
+            </motion.div>
+            <motion.div
+              className="flex items-center gap-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <motion.a
+                href="https://discord.gg/traycer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-black dark:text-blue-100/70 dark:hover:text-blue-400 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <FaDiscord className="w-6 h-6" />
+              </motion.a>
+              <motion.a
+                href="https://twitter.com/traycerAI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-black dark:text-blue-100/70 dark:hover:text-blue-400 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <FaTwitter className="w-6 h-6" />
+              </motion.a>
+              <motion.a
+                href="https://github.com/traycer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-black dark:text-blue-100/70 dark:hover:text-blue-400 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <FaGithub className="w-6 h-6" />
+              </motion.a>
+            </motion.div>
+            <motion.div
+              className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm text-gray-600 dark:text-blue-100/70"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <motion.a
+                href="#"
+                className="hover:text-black dark:hover:text-blue-400 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Terms
+              </motion.a>
+              <motion.a
+                href="#"
+                className="hover:text-black dark:hover:text-blue-400 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Privacy
+              </motion.a>
+              <motion.a
+                href="vscode:extension/cursor.cursor"
+                className="font-medium text-black dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Install Extension
+              </motion.a>
+            </motion.div>
+          </div>
+          <motion.div
+            className="mt-12 text-center text-sm text-gray-600 dark:text-blue-100/70"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            © 2024 Traycer. Transform your coding experience today.
+          </motion.div>
         </div>
       </footer>
     </div>
   );
 }
-
-const features = [
-  {
-    title: "Zero Frontend Code",
-    description:
-      "Focus on your backend logic. Leapflow automatically generates a beautiful UI based on your API endpoints.",
-    icon: ({ className }: { className?: string }) => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className={className}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Instant Deployment",
-    description:
-      "Deploy your app with a single command. Leapflow handles hosting, scaling, and infrastructure management.",
-    icon: ({ className }: { className?: string }) => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className={className}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Developer Experience",
-    description:
-      "Built for developers, by developers. Enjoy a seamless development experience with hot reloading and debugging tools.",
-    icon: ({ className }: { className?: string }) => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className={className}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z"
-        />
-      </svg>
-    ),
-  },
-];
