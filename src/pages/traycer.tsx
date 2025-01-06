@@ -16,9 +16,24 @@ export default function TraycerLanding() {
             <span className="font-semibold text-xl">Traycer AI</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm text-neutral-600 dark:text-neutral-400">
-            <a href="#features" className="hover:text-neutral-900 dark:hover:text-white transition">Features</a>
-            <a href="#pricing" className="hover:text-neutral-900 dark:hover:text-white transition">Pricing</a>
-            <a href="#docs" className="hover:text-neutral-900 dark:hover:text-white transition">Docs</a>
+            <a
+              href="#features"
+              className="hover:text-neutral-900 dark:hover:text-white transition"
+            >
+              Features
+            </a>
+            <a
+              href="#pricing"
+              className="hover:text-neutral-900 dark:hover:text-white transition"
+            >
+              Pricing
+            </a>
+            <a
+              href="#docs"
+              className="hover:text-neutral-900 dark:hover:text-white transition"
+            >
+              Docs
+            </a>
           </div>
           <button className="px-4 py-2 rounded-lg bg-neutral-900 text-white text-sm font-medium hover:bg-neutral-800 transition dark:bg-white dark:text-black dark:hover:bg-neutral-200">
             Install Extension
@@ -28,7 +43,7 @@ export default function TraycerLanding() {
 
       {/* Hero Section */}
       <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 pt-24 mt-24 relative">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -41,11 +56,16 @@ export default function TraycerLanding() {
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             Write better code with
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text"> AI assistance</span>
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text">
+              {" "}
+              AI assistance
+            </span>
           </h1>
 
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            Traycer assists in planning, implementing, and reviewing code changes directly within Visual Studio Code. Focus on writing better code while Traycer handles the rest.
+            Traycer assists in planning, implementing, and reviewing code
+            changes directly within Visual Studio Code. Focus on writing better
+            code while Traycer handles the rest.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -104,26 +124,127 @@ function calculateValue(item: DataItem): number {
         </motion.div>
       </main>
 
-      {/* Features Grid */}
-      <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto w-full" id="features">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, i) => (
+      {/* Features Section */}
+      <section
+        className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-950"
+        id="features"
+      >
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text">
+              Powerful Features
+            </h2>
+            <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg">
+              Everything you need to write better code, faster and more
+              efficiently with AI assistance.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className={cn(
+                  "p-8 rounded-2xl",
+                  "bg-white dark:bg-neutral-800",
+                  "border border-neutral-200 dark:border-neutral-700",
+                  "hover:shadow-xl hover:-translate-y-1 transition-all duration-300",
+                  "group"
+                )}
+              >
+                <div className="bg-purple-100 dark:bg-purple-900/20 rounded-lg p-3 w-fit mb-6">
+                  <feature.icon className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* IDE Integration Section */}
+      <section className="py-24 px-4 md:px-8 bg-neutral-950">
+        <div className="max-w-7xl mx-auto w-full">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white mb-4"
+          >
+            Works Where You Code
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-neutral-400 text-center text-lg mb-16 max-w-2xl mx-auto"
+          >
+            Seamlessly integrate Traycer into your favorite development
+            environments
+          </motion.p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={cn(
-                "p-6 rounded-xl",
-                "bg-white dark:bg-neutral-900",
-                "border border-neutral-200 dark:border-neutral-800"
-              )}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-neutral-900 rounded-3xl p-8 md:p-12 border border-neutral-800 hover:border-purple-500/50 transition-colors group"
             >
-              <feature.icon className="h-8 w-8 mb-4 text-purple-600" />
-              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-              <p className="text-neutral-600 dark:text-neutral-400">{feature.description}</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                VS Code Integration
+              </h3>
+              <p className="text-neutral-400 text-lg mb-8">
+                Powerful AI assistance, natively integrated into your VS Code
+                workflow.
+              </p>
+              <div className="flex gap-4">
+                <div className="bg-white rounded-full p-4 group-hover:scale-110 transition-transform">
+                  <img src="/vscode.svg" alt="VS Code" className="w-12 h-12" />
+                </div>
+              </div>
             </motion.div>
-          ))}
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-neutral-900 rounded-3xl p-8 md:p-12 border border-neutral-800 hover:border-purple-500/50 transition-colors group"
+            >
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                JetBrains Integration
+              </h3>
+              <p className="text-neutral-400 text-lg mb-8">
+                Seamlessly integrate AI assistance into your favorite JetBrains
+                IDEs.
+              </p>
+              <div className="flex gap-4">
+                <div className="bg-white rounded-full p-4 group-hover:scale-110 transition-transform">
+                  <img
+                    src="/jetbrains.svg"
+                    alt="JetBrains"
+                    className="w-12 h-12"
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-16 text-center"
+          >
+            <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-medium hover:opacity-90 transition">
+              Install for Your IDE
+            </button>
+          </motion.div>
         </div>
       </section>
     </div>
@@ -133,17 +254,20 @@ function calculateValue(item: DataItem): number {
 const features = [
   {
     title: "AI-Powered Suggestions",
-    description: "Get real-time code suggestions and improvements as you type, powered by advanced AI models.",
-    icon: IconBrain
+    description:
+      "Get intelligent code suggestions and improvements in real-time while you write, helping you code faster and with fewer errors.",
+    icon: IconBrain,
   },
   {
-    title: "Code Reviews",
-    description: "Automated code reviews that catch bugs, suggest optimizations, and ensure best practices.",
-    icon: IconCode
+    title: "Automated Code Reviews",
+    description:
+      "Receive instant feedback on your code quality, performance optimizations, and security best practices.",
+    icon: IconCode,
   },
   {
     title: "Smart Refactoring",
-    description: "Intelligent refactoring suggestions to improve code quality and maintainability.",
-    icon: IconRobot
-  }
+    description:
+      "Transform and improve your codebase with AI-assisted refactoring that maintains functionality while enhancing readability.",
+    icon: IconRobot,
+  },
 ];
