@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 // Navigation items for the sidebar
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: "🏠" },
-  { name: "Projects", href: "/dashboard/projects", icon: "📁" },
   { name: "Settings", href: "/dashboard/settings", icon: "⚙️" },
 ];
 
@@ -36,7 +35,7 @@ export default async function DashboardLayout({
           {/* Logo */}
           <div className="flex h-16 items-center justify-center border-b">
             <Link
-              href="/dashboard"
+              href="/"
               className="text-xl font-bold text-gray-900 hover:text-gray-700"
             >
               Changelog
