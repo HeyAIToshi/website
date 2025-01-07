@@ -8,13 +8,13 @@ import { projects, changelogs } from "@/server/db/schema";
 
 type Project = InferSelectModel<typeof projects>;
 type Changelog = InferSelectModel<typeof changelogs>;
-
 export async function GET(
   request: Request,
-  context: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth();
+    const { id } = await params;
 
     if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -25,10 +25,7 @@ export async function GET(
       .select()
       .from(projects)
       .where(
-        and(
-          eq(projects.id, context.params.id),
-          eq(projects.createdById, session.user.id),
-        ),
+        and(eq(projects.id, id), eq(projects.createdById, session.user.id)),
       )
       .limit(1)
       .then((res) => res[0] as Project | undefined);
@@ -41,7 +38,7 @@ export async function GET(
     const projectChangelogs = await db
       .select()
       .from(changelogs)
-      .where(eq(changelogs.projectId, context.params.id))
+      .where(eq(changelogs.projectId, id))
       .orderBy(desc(changelogs.createdAt))
       .then((res) => res as Changelog[]);
 
