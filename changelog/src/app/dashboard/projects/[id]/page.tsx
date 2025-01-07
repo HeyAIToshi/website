@@ -11,8 +11,24 @@ import {
   Copy,
   Check,
   ExternalLink,
+  Calendar,
+  Tag,
 } from "lucide-react";
 import Link from "next/link";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 interface Project {
   id: string;
@@ -98,11 +114,21 @@ export default function ProjectPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto space-y-6 py-10">
         <div className="space-y-4">
-          <div className="h-8 w-48 animate-pulse rounded bg-muted" />
-          <div className="h-12 w-96 animate-pulse rounded bg-muted" />
-          <div className="h-6 w-72 animate-pulse rounded bg-muted" />
+          <div className="h-4 w-48 animate-pulse rounded bg-muted" />
+          <div className="h-8 w-96 animate-pulse rounded bg-muted" />
+          <div className="h-4 w-72 animate-pulse rounded bg-muted" />
+        </div>
+        <div className="grid gap-6">
+          {[1, 2, 3].map((i) => (
+            <Card key={i} className="animate-pulse">
+              <CardHeader className="space-y-4">
+                <div className="h-6 w-32 rounded bg-muted" />
+                <div className="h-24 w-full rounded bg-muted" />
+              </CardHeader>
+            </Card>
+          ))}
         </div>
       </div>
     );
@@ -111,78 +137,108 @@ export default function ProjectPage() {
   if (!project) {
     return (
       <div className="container mx-auto py-10">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold">Project not found</h1>
-          <p className="text-muted-foreground">
-            The project you&apos;re looking for doesn&apos;t exist or you
-            don&apos;t have access to it.
-          </p>
-          <Link
-            href="/dashboard"
-            className="mt-4 inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Dashboard
-          </Link>
-        </div>
+        <Card className="p-6">
+          <div className="space-y-4 text-center">
+            <h1 className="text-2xl font-bold text-foreground">
+              Project not found
+            </h1>
+            <p className="text-muted-foreground">
+              The project you&apos;re looking for doesn&apos;t exist or you
+              don&apos;t have access to it.
+            </p>
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Dashboard
+            </Link>
+          </div>
+        </Card>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto space-y-8 py-10">
       {/* Header */}
-      <div className="mb-8">
+      <div className="space-y-6">
         <Link
           href="/dashboard"
-          className="mb-4 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Dashboard
         </Link>
+
         <div className="flex items-start justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">{project.name}</h1>
+          <div className="space-y-4">
+            <h1 className="text-4xl font-bold tracking-tight">
+              {project.name}
+            </h1>
             {project.description && (
-              <p className="mt-1 text-muted-foreground">
+              <p className="text-lg text-muted-foreground">
                 {project.description}
               </p>
             )}
-            <a
-              href={project.repositoryUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-            >
-              View Repository
-              <ExternalLink className="h-4 w-4" />
-            </a>
+            <div className="flex items-center gap-4">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={project.repositoryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      View Repository
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent>Open repository in a new tab</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
           </div>
-          <div className="flex gap-4">
-            <Link
-              href={`/dashboard/projects/${projectId}/settings`}
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-input bg-background px-4 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            >
-              <Settings className="h-4 w-4" />
-              Settings
-            </Link>
-            <button
-              onClick={() => void handleGenerateChangelog()}
-              disabled={generating}
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              {generating ? (
-                <>
-                  <RefreshCw className="h-4 w-4 animate-spin" />
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <RefreshCw className="h-4 w-4" />
-                  Generate Changelog
-                </>
-              )}
-            </button>
+
+          <div className="flex gap-3">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    href={`/dashboard/projects/${projectId}/settings`}
+                    className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-input bg-background px-4 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
+                    <Settings className="h-4 w-4" />
+                    Settings
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>Configure project settings</TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => void handleGenerateChangelog()}
+                    disabled={generating}
+                    className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  >
+                    {generating ? (
+                      <>
+                        <RefreshCw className="h-4 w-4 animate-spin" />
+                        Generating...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="h-4 w-4" />
+                        Generate Changelog
+                      </>
+                    )}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>Generate a new changelog entry</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </div>
       </div>
@@ -191,73 +247,120 @@ export default function ProjectPage() {
       <div className="space-y-6">
         {changelogs.length > 0 ? (
           changelogs.map((changelog) => (
-            <div key={changelog.id} className="rounded-lg border bg-card p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold">
-                    Version {changelog.version}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Generated on{" "}
-                    {new Date(changelog.createdAt).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </p>
+            <Card
+              key={changelog.id}
+              className="group transition-all hover:shadow-md"
+            >
+              <CardHeader className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <CardTitle>Version {changelog.version}</CardTitle>
+                      <Badge variant="secondary" className="text-xs">
+                        {changelog.publishedAt ? "Published" : "Draft"}
+                      </Badge>
+                    </div>
+                    <CardDescription className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      Generated on{" "}
+                      {new Date(changelog.createdAt).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        },
+                      )}
+                    </CardDescription>
+                  </div>
+                  <div className="flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            onClick={() =>
+                              void handleCopyChangelog(changelog.content)
+                            }
+                            className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          >
+                            {copied ? (
+                              <>
+                                <Check className="h-4 w-4" />
+                                Copied!
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-4 w-4" />
+                                Copy
+                              </>
+                            )}
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          Copy changelog to clipboard
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                            <Download className="h-4 w-4" />
+                            Download
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          Download changelog as file
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => void handleCopyChangelog(changelog.content)}
-                    className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="h-4 w-4" />
-                        Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-4 w-4" />
-                        Copy
-                      </>
-                    )}
-                  </button>
-                  <button className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                    <Download className="h-4 w-4" />
-                    Download
-                  </button>
-                </div>
-              </div>
-              <pre className="max-h-96 overflow-auto rounded-lg bg-muted p-4 text-sm">
-                {changelog.content}
-              </pre>
-            </div>
+                <pre
+                  className={cn(
+                    "max-h-96 overflow-auto rounded-lg bg-muted p-4 text-sm",
+                    "scrollbar-thin scrollbar-thumb-border scrollbar-track-muted",
+                  )}
+                >
+                  {changelog.content}
+                </pre>
+              </CardHeader>
+            </Card>
           ))
         ) : (
-          <div className="rounded-lg border bg-card p-8 text-center">
-            <h3 className="mb-2 text-lg font-semibold">No Changelogs Yet</h3>
-            <p className="mb-4 text-muted-foreground">
-              Generate your first changelog to get started
-            </p>
-            <button
-              onClick={() => void handleGenerateChangelog()}
-              disabled={generating}
-              className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              {generating ? (
-                <>
-                  <RefreshCw className="h-4 w-4 animate-spin" />
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <RefreshCw className="h-4 w-4" />
-                  Generate Changelog
-                </>
-              )}
-            </button>
-          </div>
+          <Card className="p-8">
+            <div className="space-y-4 text-center">
+              <Tag className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="text-lg font-semibold">No Changelogs Yet</h3>
+              <p className="mx-auto max-w-sm text-muted-foreground">
+                Generate your first changelog to keep track of your
+                project&apos;s updates and changes.
+              </p>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => void handleGenerateChangelog()}
+                      disabled={generating}
+                      className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                    >
+                      {generating ? (
+                        <>
+                          <RefreshCw className="h-4 w-4 animate-spin" />
+                          Generating...
+                        </>
+                      ) : (
+                        <>
+                          <RefreshCw className="h-4 w-4" />
+                          Generate Changelog
+                        </>
+                      )}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>Generate your first changelog</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+          </Card>
         )}
       </div>
     </div>
