@@ -10,8 +10,8 @@ type Project = InferSelectModel<typeof projects>;
 type Changelog = InferSelectModel<typeof changelogs>;
 
 export async function GET(
-  req: Request,
-  { params }: { params: { id: string } },
+  request: Request,
+  context: { params: { id: string } },
 ) {
   try {
     const session = await auth();
@@ -26,7 +26,7 @@ export async function GET(
       .from(projects)
       .where(
         and(
-          eq(projects.id, params.id),
+          eq(projects.id, context.params.id),
           eq(projects.createdById, session.user.id),
         ),
       )
@@ -41,7 +41,7 @@ export async function GET(
     const projectChangelogs = await db
       .select()
       .from(changelogs)
-      .where(eq(changelogs.projectId, params.id))
+      .where(eq(changelogs.projectId, context.params.id))
       .orderBy(desc(changelogs.createdAt))
       .then((res) => res as Changelog[]);
 
