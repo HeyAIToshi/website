@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useParams } from "next/navigation";
-import { useSession } from "next-auth/react";
 import {
   ArrowLeft,
   Settings,
@@ -13,14 +12,13 @@ import {
   ExternalLink,
   Calendar,
   Tag,
+  Loader2,
 } from "lucide-react";
 import Link from "next/link";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
@@ -29,6 +27,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 interface Project {
   id: string;
@@ -46,6 +45,161 @@ interface Changelog {
   createdAt: string;
 }
 
+// Separate component for changelog content
+function ChangelogEntry({
+  changelog,
+  onCopy,
+  onDownload,
+  copied,
+}: {
+  changelog: {
+    id: string;
+    version: string;
+    content: string;
+    publishedAt: string | null;
+    createdAt: string;
+  };
+  onCopy: (id: string, content: string) => void;
+  onDownload: (version: string, content: string) => void;
+  copied: string | null;
+}) {
+  const { theme } = useTheme();
+
+  return (
+    <div
+      className={cn(
+        "group rounded-lg border border-border bg-card p-6 transition-all hover:shadow-md",
+        changelog.id === "temp" && "animate-pulse",
+      )}
+    >
+      <div className="mb-6 flex items-center justify-between">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <h3 className="text-xl font-semibold">
+              Version {changelog.version}
+            </h3>
+            <Badge
+              variant={changelog.publishedAt ? "default" : "secondary"}
+              className="text-xs"
+            >
+              {changelog.publishedAt ? "Published" : "Draft"}
+            </Badge>
+          </div>
+          <p className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Calendar className="h-4 w-4" />
+            Generated on{" "}
+            {new Date(changelog.createdAt).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => onCopy(changelog.id, changelog.content)}
+                  className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  {copied === changelog.id ? (
+                    <>
+                      <Check className="h-4 w-4" />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-4 w-4" />
+                      Copy
+                    </>
+                  )}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>Copy changelog to clipboard</TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() =>
+                    onDownload(changelog.version, changelog.content)
+                  }
+                  className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <Download className="h-4 w-4" />
+                  Download
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>Download changelog as file</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      </div>
+      <div className="prose prose-sm dark:prose-invert max-w-none rounded-lg bg-muted/50 p-6 [&>h1]:mb-6 [&>h2]:mb-4 [&>h2]:mt-8 [&>h2]:border-b [&>h2]:pb-2 [&>p]:mb-4 [&>p]:leading-7 [&>ul>li]:mb-2 [&>ul]:mb-6 [&>ul]:mt-4">
+        <Suspense fallback={<div className="animate-pulse">Loading...</div>}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h1: ({ children }) => (
+                <h1 className="text-2xl font-bold">{children}</h1>
+              ),
+              h2: ({ children }) => (
+                <h2 className="text-xl font-semibold">{children}</h2>
+              ),
+              p: ({ children }) => (
+                <p className="whitespace-pre-wrap">{children}</p>
+              ),
+              ul: ({ children }) => (
+                <ul className="list-disc pl-6 [&>li>p]:my-0">{children}</ul>
+              ),
+              li: ({ children }) => <li className="text-base">{children}</li>,
+              a: ({ href, children }) => (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  {children}
+                </a>
+              ),
+              code: ({ className, children, ...props }) => {
+                const match = /language-(\w+)/.exec(className ?? "");
+                const content = String(children ?? "").replace(/\n$/, "");
+
+                if (!match || !content) {
+                  return (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+
+                const language = match[1]?.toLowerCase() ?? "text";
+                const style = theme === "dark" ? vscDarkPlus : undefined;
+
+                return (
+                  <SyntaxHighlighter
+                    language={language}
+                    style={style ?? {}}
+                    PreTag="div"
+                    customStyle={{ margin: 0 }}
+                  >
+                    {content}
+                  </SyntaxHighlighter>
+                );
+              },
+            }}
+          >
+            {changelog.content}
+          </ReactMarkdown>
+        </Suspense>
+      </div>
+    </div>
+  );
+}
+
 export default function ProjectPage() {
   const params = useParams();
   const projectId = params?.id as string;
@@ -53,7 +207,7 @@ export default function ProjectPage() {
   const [changelogs, setChangelogs] = useState<Changelog[]>([]);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
 
   useEffect(() => {
     if (projectId) {
@@ -87,28 +241,73 @@ export default function ProjectPage() {
   async function handleGenerateChangelog() {
     try {
       setGenerating(true);
+      // Create a temporary changelog entry first
+      const tempChangelog: Changelog = {
+        id: "temp",
+        version: "New",
+        content: "",
+        createdAt: new Date().toISOString(),
+        publishedAt: null,
+      };
+      setChangelogs((prev) => [tempChangelog, ...prev]);
+
       const response = await fetch(`/api/projects/${projectId}/generate`, {
         method: "POST",
       });
 
-      if (response.ok) {
-        await fetchProjectData();
+      if (!response.ok) {
+        throw new Error("Failed to generate changelog");
       }
+
+      const reader = response.body?.getReader();
+      if (!reader) return;
+
+      const decoder = new TextDecoder();
+      let content = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        content += decoder.decode(value, { stream: true });
+        // Update the temporary changelog with new content
+        setChangelogs((prev) => {
+          const [first, ...rest] = prev;
+          if (!first) return prev;
+          return [{ ...first, content } as Changelog, ...rest];
+        });
+      }
+
+      await fetchProjectData(); // Fetch final data
     } catch (error) {
       console.error("Error generating changelog:", error);
+      // Remove the temporary changelog on error
+      setChangelogs((prev) => prev.filter((c) => c.id !== "temp"));
     } finally {
       setGenerating(false);
     }
   }
 
-  async function handleCopyChangelog(content: string) {
+  async function handleCopyChangelog(id: string, content: string) {
     try {
       await navigator.clipboard.writeText(content);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopied(id);
+      setTimeout(() => setCopied(null), 2000);
     } catch (error) {
       console.error("Error copying to clipboard:", error);
     }
+  }
+
+  async function handleDownloadChangelog(version: string, content: string) {
+    const blob = new Blob([content], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `changelog-v${version}.md`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   }
 
   if (loading) {
@@ -121,12 +320,15 @@ export default function ProjectPage() {
         </div>
         <div className="grid gap-6">
           {[1, 2, 3].map((i) => (
-            <Card key={i} className="animate-pulse">
-              <CardHeader className="space-y-4">
+            <div
+              key={i}
+              className="animate-pulse rounded-lg border border-border p-6"
+            >
+              <div className="space-y-4">
                 <div className="h-6 w-32 rounded bg-muted" />
                 <div className="h-24 w-full rounded bg-muted" />
-              </CardHeader>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -136,7 +338,7 @@ export default function ProjectPage() {
   if (!project) {
     return (
       <div className="container mx-auto py-10">
-        <Card className="p-6">
+        <div className="rounded-lg border border-border p-6">
           <div className="space-y-4 text-center">
             <h1 className="text-2xl font-bold text-foreground">
               Project not found
@@ -153,7 +355,7 @@ export default function ProjectPage() {
               Back to Dashboard
             </Link>
           </div>
-        </Card>
+        </div>
       </div>
     );
   }
@@ -224,7 +426,7 @@ export default function ProjectPage() {
                   >
                     {generating ? (
                       <>
-                        <RefreshCw className="h-4 w-4 animate-spin" />
+                        <Loader2 className="h-4 w-4 animate-spin" />
                         Generating...
                       </>
                     ) : (
@@ -246,87 +448,16 @@ export default function ProjectPage() {
       <div className="space-y-6">
         {changelogs.length > 0 ? (
           changelogs.map((changelog) => (
-            <Card
+            <ChangelogEntry
               key={changelog.id}
-              className="group transition-all hover:shadow-md"
-            >
-              <CardHeader className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <CardTitle>Version {changelog.version}</CardTitle>
-                      <Badge variant="secondary" className="text-xs">
-                        {changelog.publishedAt ? "Published" : "Draft"}
-                      </Badge>
-                    </div>
-                    <CardDescription className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      Generated on{" "}
-                      {new Date(changelog.createdAt).toLocaleDateString(
-                        "en-US",
-                        {
-                          month: "long",
-                          day: "numeric",
-                          year: "numeric",
-                        },
-                      )}
-                    </CardDescription>
-                  </div>
-                  <div className="flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button
-                            onClick={() =>
-                              void handleCopyChangelog(changelog.content)
-                            }
-                            className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                          >
-                            {copied ? (
-                              <>
-                                <Check className="h-4 w-4" />
-                                Copied!
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="h-4 w-4" />
-                                Copy
-                              </>
-                            )}
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          Copy changelog to clipboard
-                        </TooltipContent>
-                      </Tooltip>
-
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                            <Download className="h-4 w-4" />
-                            Download
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          Download changelog as file
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </div>
-                <pre
-                  className={cn(
-                    "max-h-96 overflow-auto rounded-lg bg-muted p-4 text-sm",
-                    "scrollbar-thin scrollbar-thumb-border scrollbar-track-muted",
-                  )}
-                >
-                  {changelog.content}
-                </pre>
-              </CardHeader>
-            </Card>
+              changelog={changelog}
+              onCopy={handleCopyChangelog}
+              onDownload={handleDownloadChangelog}
+              copied={copied}
+            />
           ))
         ) : (
-          <Card className="p-8">
+          <div className="rounded-lg border border-border bg-card p-8">
             <div className="space-y-4 text-center">
               <Tag className="mx-auto h-12 w-12 text-muted-foreground" />
               <h3 className="text-lg font-semibold">No Changelogs Yet</h3>
@@ -344,7 +475,7 @@ export default function ProjectPage() {
                     >
                       {generating ? (
                         <>
-                          <RefreshCw className="h-4 w-4 animate-spin" />
+                          <Loader2 className="h-4 w-4 animate-spin" />
                           Generating...
                         </>
                       ) : (
@@ -359,7 +490,7 @@ export default function ProjectPage() {
                 </Tooltip>
               </TooltipProvider>
             </div>
-          </Card>
+          </div>
         )}
       </div>
     </div>

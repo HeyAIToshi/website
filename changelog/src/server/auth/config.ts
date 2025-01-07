@@ -41,6 +41,12 @@ export const authConfig = {
     GithubProvider({
       clientId: env.AUTH_GITHUB_ID,
       clientSecret: env.AUTH_GITHUB_SECRET,
+      authorization: {
+        params: {
+          // Request full repo access including private repos
+          scope: "repo user:email",
+        },
+      },
     }),
     /**
      * ...add more providers here.

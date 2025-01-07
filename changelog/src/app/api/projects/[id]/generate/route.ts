@@ -1,10 +1,15 @@
 import { auth } from "@/server/auth";
 import { NextResponse } from "next/server";
-import { eq, and } from "drizzle-orm";
+import { eq, and, desc } from "drizzle-orm";
 import { db } from "@/server/db";
 import { projects, changelogs, accounts } from "@/server/db/schema";
+import OpenAI from "openai";
+import { env } from "@/env";
 
 const GITHUB_API_URL = "https://api.github.com";
+const openai = new OpenAI({
+  apiKey: env.OPENAI_API_KEY,
+});
 
 interface Commit {
   sha: string;
@@ -24,11 +29,17 @@ interface ChangelogSettings {
   groupByType: boolean;
 }
 
-async function getLatestCommits(accessToken: string, repositoryUrl: string) {
-  // Extract owner and repo from the repository URL
+async function getLatestCommits(
+  accessToken: string,
+  repositoryUrl: string,
+): Promise<Commit[]> {
   const [owner, repo] = repositoryUrl
     .replace("https://github.com/", "")
     .split("/");
+
+  if (!owner || !repo) {
+    throw new Error("Invalid repository URL format");
+  }
 
   const response = await fetch(
     `${GITHUB_API_URL}/repos/${owner}/${repo}/commits`,
@@ -44,134 +55,116 @@ async function getLatestCommits(accessToken: string, repositoryUrl: string) {
     throw new Error("Failed to fetch commits");
   }
 
-  return response.json() as Promise<Commit[]>;
+  return response.json();
 }
 
 function parseCommitMessage(message: string) {
-  // Parse conventional commit format: <type>(<scope>): <description>
   const regex = /^(\w+)(?:\(([^)]+)\))?: (.+)/;
   const result = regex.exec(message);
   if (result) {
-    const [, type, scope, description] = result;
+    const [, type = "other", scope, description = message] = result;
     return { type, scope, description };
   }
   return { type: "other", scope: null, description: message };
 }
 
-function generateChangelogContent(
-  commits: Commit[],
-  settings: ChangelogSettings,
-) {
-  const version = new Date().toISOString().split("T")[0]; // Use date as version
-  let content = "";
+async function getLatestVersion(projectId: string): Promise<string> {
+  const latestChangelog = await db
+    .select({ version: changelogs.version })
+    .from(changelogs)
+    .where(eq(changelogs.projectId, projectId))
+    .orderBy(desc(changelogs.createdAt))
+    .limit(1)
+    .then((res) => res[0]);
 
-  if (settings.template === "keep-a-changelog") {
-    content += `# Changelog\n\n`;
-    content += `## [${version}]\n\n`;
-
-    if (settings.groupByType) {
-      const groupedCommits: Record<string, Commit[]> = {};
-      commits.forEach((commit) => {
-        const { type } = parseCommitMessage(commit.commit.message);
-        const commitType = type ?? "other";
-        if (!groupedCommits[commitType]) {
-          groupedCommits[commitType] = [];
-        }
-        groupedCommits[commitType].push(commit);
-      });
-
-      Object.entries(groupedCommits).forEach(([type, typeCommits]) => {
-        content += `### ${type.charAt(0).toUpperCase() + type.slice(1)}\n\n`;
-        typeCommits.forEach((commit) => {
-          const { description } = parseCommitMessage(commit.commit.message);
-          if (settings.includeLinks) {
-            content += `- ${description} ([${commit.sha.slice(0, 7)}](${
-              commit.html_url
-            }))\n`;
-          } else {
-            content += `- ${description}\n`;
-          }
-        });
-        content += "\n";
-      });
-    } else {
-      commits.forEach((commit) => {
-        const { description } = parseCommitMessage(commit.commit.message);
-        if (settings.includeLinks) {
-          content += `- ${description} ([${commit.sha.slice(0, 7)}](${
-            commit.html_url
-          }))\n`;
-        } else {
-          content += `- ${description}\n`;
-        }
-      });
-    }
-  } else if (settings.template === "semantic") {
-    content += `# ${version}\n\n`;
-
-    const types: Record<string, string> = {
-      feat: "Features",
-      fix: "Bug Fixes",
-      docs: "Documentation",
-      style: "Styles",
-      refactor: "Code Refactoring",
-      perf: "Performance Improvements",
-      test: "Tests",
-      build: "Builds",
-      ci: "Continuous Integration",
-      chore: "Chores",
-      revert: "Reverts",
-    };
-
-    if (settings.groupByType) {
-      const groupedCommits: Record<string, Commit[]> = {};
-      commits.forEach((commit) => {
-        const { type } = parseCommitMessage(commit.commit.message);
-        const commitType = type ?? "other";
-        if (!groupedCommits[commitType]) {
-          groupedCommits[commitType] = [];
-        }
-        groupedCommits[commitType].push(commit);
-      });
-
-      Object.entries(groupedCommits).forEach(([type, typeCommits]) => {
-        const title =
-          types[type] ?? type.charAt(0).toUpperCase() + type.slice(1);
-        content += `## ${title}\n\n`;
-        typeCommits.forEach((commit) => {
-          const { scope, description } = parseCommitMessage(
-            commit.commit.message,
-          );
-          const scopeText = scope ? `**${scope}:** ` : "";
-          if (settings.includeLinks) {
-            content += `* ${scopeText}${description} ([${commit.sha.slice(0, 7)}](${
-              commit.html_url
-            }))\n`;
-          } else {
-            content += `* ${scopeText}${description}\n`;
-          }
-        });
-        content += "\n";
-      });
-    } else {
-      commits.forEach((commit) => {
-        const { type, scope, description } = parseCommitMessage(
-          commit.commit.message,
-        );
-        const scopeText = scope ? `**${scope}:** ` : "";
-        if (settings.includeLinks) {
-          content += `* **${type}:** ${scopeText}${description} ([${commit.sha.slice(
-            0,
-            7,
-          )}](${commit.html_url}))\n`;
-        } else {
-          content += `* **${type}:** ${scopeText}${description}\n`;
-        }
-      });
-    }
+  if (!latestChangelog?.version) {
+    return "1.0.0";
   }
 
-  return { version, content };
+  const versionParts = latestChangelog.version.split(".").map(Number);
+  const major = versionParts[0] ?? 1;
+  const minor = versionParts[1] ?? 0;
+  const patch = versionParts[2] ?? 0;
+  return `${major}.${minor}.${patch + 1}`;
+}
+
+async function generateChangelogWithAI(
+  commits: Commit[],
+  settings: ChangelogSettings,
+): Promise<ReadableStream> {
+  try {
+    const commitsByType = new Map<string, Commit[]>();
+
+    commits.forEach((commit) => {
+      const { type } = parseCommitMessage(commit.commit.message);
+      if (!commitsByType.has(type)) {
+        commitsByType.set(type, []);
+      }
+      commitsByType.get(type)?.push(commit);
+    });
+
+    const commitData = Array.from(commitsByType.entries()).map(
+      ([type, commits]) => ({
+        type,
+        commits: commits.map((c) => ({
+          message: c.commit.message,
+          url: settings.includeLinks ? c.html_url : null,
+          author: c.commit.author.name,
+          date: c.commit.author.date,
+        })),
+      }),
+    );
+
+    const prompt = `Generate a clear and professional changelog based on the following commits. 
+The changelog should be well-organized and easy to read.
+${settings.groupByType ? "Group changes by type (e.g., Features, Bug Fixes, etc.)." : ""}
+${settings.includeLinks ? "Include links to the commits." : ""}
+
+Commit data:
+${JSON.stringify(commitData, null, 2)}
+
+Please format the changelog in markdown.`;
+
+    const stream = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are a professional changelog generator. Your task is to create clear, concise, and well-organized changelogs from git commits.",
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      temperature: 0.7,
+      max_tokens: 1500,
+      stream: true,
+    });
+
+    const textEncoder = new TextEncoder();
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of stream) {
+            const content = chunk.choices[0]?.delta?.content;
+            if (content) {
+              controller.enqueue(textEncoder.encode(content));
+            }
+          }
+          controller.close();
+        } catch (error) {
+          controller.error(error);
+        }
+      },
+    });
+
+    return readable;
+  } catch (error) {
+    console.error("Error generating changelog with AI:", error);
+    throw new Error("Failed to generate changelog with AI");
+  }
 }
 
 export async function POST(
@@ -182,63 +175,84 @@ export async function POST(
     const session = await auth();
     const { id } = await params;
 
-    if (!session?.user?.id) {
-      return new NextResponse("Unauthorized", { status: 401 });
+    if (!session?.user) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    // Get project and verify ownership
-    const project = await db.query.projects.findFirst({
-      where: and(
-        eq(projects.id, id),
-        eq(projects.createdById, session.user.id),
-      ),
-    });
+    const [project, account] = await Promise.all([
+      db.query.projects.findFirst({
+        where: and(
+          eq(projects.id, id),
+          eq(projects.createdById, session.user.id),
+        ),
+      }),
+      db.query.accounts.findFirst({
+        where: eq(accounts.userId, session.user.id),
+      }),
+    ]);
 
     if (!project) {
-      return new NextResponse("Project not found", { status: 404 });
+      return NextResponse.json(
+        { message: "Project not found" },
+        { status: 404 },
+      );
     }
-
-    // Get GitHub access token
-    const account = await db.query.accounts.findFirst({
-      where: eq(accounts.userId, session.user.id),
-    });
 
     if (!account?.access_token) {
-      return new NextResponse("GitHub account not connected", { status: 400 });
+      return NextResponse.json(
+        { message: "GitHub account not connected" },
+        { status: 400 },
+      );
     }
 
-    // Fetch commits from GitHub
     const commits = await getLatestCommits(
       account.access_token,
       project.repositoryUrl,
     );
+    const settings = JSON.parse(project.settings) as ChangelogSettings;
+    const version = await getLatestVersion(project.id);
+    const stream = await generateChangelogWithAI(commits, settings);
 
-    // Parse and validate settings
-    let settings: ChangelogSettings;
-    try {
-      settings = JSON.parse(project.settings) as ChangelogSettings;
-    } catch (error) {
-      console.log(error);
-      return new NextResponse("Invalid project settings", { status: 400 });
-    }
-
-    // Generate changelog content
-    const { version, content } = generateChangelogContent(commits, settings);
-
-    // Save changelog to database
-    const [changelog] = await db
+    // Create a new changelog entry with empty content initially
+    const newChangelog = await db
       .insert(changelogs)
-      //@ts-expect-error this is a bug in the database schema
       .values({
         projectId: project.id,
         version,
-        content,
+        content: "", // Content will be updated as it streams
       })
       .returning();
 
-    return NextResponse.json(changelog);
+    // Create a transform stream to accumulate the content
+    let accumulatedContent = "";
+    const transform = new TransformStream({
+      transform(chunk: Uint8Array, controller) {
+        const text = new TextDecoder().decode(chunk);
+        accumulatedContent += text;
+        controller.enqueue(chunk);
+      },
+      async flush() {
+        if (newChangelog[0]?.id) {
+          await db
+            .update(changelogs)
+            .set({ content: accumulatedContent })
+            .where(eq(changelogs.id, newChangelog[0].id));
+        }
+      },
+    });
+
+    return new NextResponse(stream.pipeThrough(transform), {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    });
   } catch (error) {
     console.error("Error generating changelog:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return NextResponse.json(
+      { message: "Failed to generate changelog" },
+      { status: 500 },
+    );
   }
 }

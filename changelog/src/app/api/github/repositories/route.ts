@@ -15,6 +15,7 @@ const githubRepoSchema = z.object({
   description: z.string().nullable(),
   html_url: z.string(),
   updated_at: z.string(),
+  private: z.boolean(),
 });
 
 interface TransformedRepo {
@@ -23,6 +24,7 @@ interface TransformedRepo {
   description: string | null;
   url: string;
   updatedAt: string;
+  private: boolean;
 }
 
 export async function GET() {
@@ -30,7 +32,7 @@ export async function GET() {
     const session = await auth();
 
     if (!session?.user) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     // Get GitHub access token from the database
@@ -39,21 +41,30 @@ export async function GET() {
     });
 
     if (!account?.access_token) {
-      return new NextResponse("GitHub account not connected", { status: 400 });
+      return NextResponse.json(
+        { message: "GitHub account not connected" },
+        { status: 400 },
+      );
     }
 
     // Fetch repositories from GitHub API
-    const response = await fetch(`${GITHUB_API_URL}/user/repos`, {
-      headers: {
-        Authorization: `Bearer ${account.access_token}`,
-        Accept: "application/vnd.github.v3+json",
+    const response = await fetch(
+      `${GITHUB_API_URL}/user/repos`,
+      {
+        headers: {
+          Authorization: `Bearer ${account.access_token}`,
+          Accept: "application/vnd.github.v3+json",
+        },
       },
-    });
+    );
 
     if (!response.ok) {
-      return new NextResponse("Failed to fetch repositories", {
-        status: response.status,
-      });
+      const error = await response.text();
+      console.error("GitHub API error:", error);
+      return NextResponse.json(
+        { message: "Failed to fetch repositories", error },
+        { status: response.status },
+      );
     }
 
     const repositories = (await response.json()) as unknown[];
@@ -73,6 +84,7 @@ export async function GET() {
           description: validRepo.description,
           url: validRepo.html_url,
           updatedAt: validRepo.updated_at,
+          private: validRepo.private,
         } satisfies TransformedRepo;
       })
       .filter((repo): repo is TransformedRepo => repo !== null);
@@ -80,6 +92,9 @@ export async function GET() {
     return NextResponse.json(transformedRepos);
   } catch (error) {
     console.error("Error fetching repositories:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

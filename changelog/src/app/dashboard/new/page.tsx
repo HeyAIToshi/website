@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import {
   Github,
   ArrowLeft,
@@ -9,6 +10,8 @@ import {
   Settings2,
   Check,
   ArrowRight,
+  Lock,
+  LogOut,
 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,6 +29,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
 interface Repository {
   id: number;
@@ -33,6 +37,7 @@ interface Repository {
   description: string | null;
   url: string;
   updatedAt: string;
+  private: boolean;
 }
 
 interface ApiError {
@@ -87,6 +92,7 @@ const slideVariants = {
 type Step = "repository" | "configure";
 
 export default function NewProjectPage() {
+  const { data: session } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -185,6 +191,19 @@ export default function NewProjectPage() {
   };
 
   const progressPercentage = currentStep === "repository" ? 50 : 100;
+
+  if (!session?.user) {
+    return (
+      <div className="container mx-auto flex min-h-screen items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle>Not Authenticated</CardTitle>
+            <CardDescription>Please sign in to continue</CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen">
@@ -318,41 +337,63 @@ export default function NewProjectPage() {
                         </div>
                       ))
                     ) : repositories.length > 0 ? (
-                      repositories.map((repo) => (
-                        <motion.button
-                          key={repo.id}
-                          variants={item}
-                          onClick={() => setSelectedRepo(repo)}
-                          className={`flex w-full items-start gap-4 rounded-lg border p-4 text-left transition-all hover:bg-accent hover:shadow-sm ${
-                            selectedRepo?.id === repo.id
-                              ? "border-primary bg-accent shadow-sm"
-                              : ""
-                          }`}
-                        >
-                          <Github className="mt-1 h-5 w-5 text-muted-foreground" />
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-2">
-                              <span className="truncate font-medium">
-                                {repo.name}
-                              </span>
-                              {selectedRepo?.id === repo.id && (
-                                <Check className="h-4 w-4 shrink-0 text-primary" />
-                              )}
-                            </div>
-                            {repo.description && (
-                              <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
-                                {repo.description}
-                              </p>
+                      <motion.div
+                        variants={container}
+                        initial="hidden"
+                        animate="show"
+                        className="space-y-2"
+                      >
+                        {repositories.map((repo) => (
+                          <motion.button
+                            key={repo.id}
+                            variants={item}
+                            className={cn(
+                              "w-full rounded-lg border p-4 text-left transition-colors hover:bg-accent",
+                              selectedRepo?.id === repo.id && "border-primary",
                             )}
-                            <div className="mt-2 flex items-center gap-2">
-                              <Badge variant="secondary" className="text-xs">
-                                Updated{" "}
-                                {new Date(repo.updatedAt).toLocaleDateString()}
-                              </Badge>
+                            onClick={() => setSelectedRepo(repo)}
+                          >
+                            <div className="flex gap-4">
+                              <Github className="mt-1 h-5 w-5 text-muted-foreground" />
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center gap-2">
+                                  <span className="truncate font-medium">
+                                    {repo.name}
+                                  </span>
+                                  {repo.private && (
+                                    <Lock className="h-4 w-4 text-muted-foreground" />
+                                  )}
+                                  {selectedRepo?.id === repo.id && (
+                                    <Check className="h-4 w-4 shrink-0 text-primary" />
+                                  )}
+                                </div>
+                                {repo.description && (
+                                  <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                                    {repo.description}
+                                  </p>
+                                )}
+                                <div className="mt-2 flex items-center gap-2">
+                                  <Badge
+                                    variant="secondary"
+                                    className="text-xs"
+                                  >
+                                    {repo.private ? "Private" : "Public"}
+                                  </Badge>
+                                  <Badge
+                                    variant="secondary"
+                                    className="text-xs"
+                                  >
+                                    Updated{" "}
+                                    {new Date(
+                                      repo.updatedAt,
+                                    ).toLocaleDateString()}
+                                  </Badge>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </motion.button>
-                      ))
+                          </motion.button>
+                        ))}
+                      </motion.div>
                     ) : (
                       <div className="p-8 text-center text-muted-foreground">
                         <Github className="mx-auto mb-3 h-8 w-8 opacity-50" />
