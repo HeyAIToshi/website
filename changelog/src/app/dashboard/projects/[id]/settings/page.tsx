@@ -77,9 +77,9 @@ export default function ProjectSettingsPage() {
       setLoading(true);
       const response = await fetch(`/api/projects/${projectId}`);
       if (response.ok) {
-        const data = await response.json();
+        const data = (await response.json()) as Project;
         setProject(data);
-        setSettings(JSON.parse(data.settings));
+        setSettings(JSON.parse(data.settings) as ProjectSettings);
       }
     } catch (error) {
       console.error("Error fetching project:", error);

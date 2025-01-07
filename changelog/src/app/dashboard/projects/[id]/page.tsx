@@ -49,7 +49,6 @@ interface Changelog {
 export default function ProjectPage() {
   const params = useParams();
   const projectId = params?.id as string;
-  const { data: session } = useSession();
   const [project, setProject] = useState<Project | null>(null);
   const [changelogs, setChangelogs] = useState<Changelog[]>([]);
   const [loading, setLoading] = useState(true);
