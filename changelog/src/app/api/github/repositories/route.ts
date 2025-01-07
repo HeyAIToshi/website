@@ -17,8 +17,6 @@ const githubRepoSchema = z.object({
   updated_at: z.string(),
 });
 
-type GithubRepo = z.infer<typeof githubRepoSchema>;
-
 interface TransformedRepo {
   id: number;
   name: string;

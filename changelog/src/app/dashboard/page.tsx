@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { Plus, Settings, Github, Calendar, Loader2 } from "lucide-react";
+import { Plus, Settings, Github, Calendar } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 

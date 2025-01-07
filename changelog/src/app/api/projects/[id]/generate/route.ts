@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { eq, and } from "drizzle-orm";
 import { db } from "@/server/db";
 import { projects, changelogs, accounts } from "@/server/db/schema";
-import { z } from "zod";
 
 const GITHUB_API_URL = "https://api.github.com";
 
@@ -74,7 +73,7 @@ function generateChangelogContent(
       const groupedCommits: Record<string, Commit[]> = {};
       commits.forEach((commit) => {
         const { type } = parseCommitMessage(commit.commit.message);
-        const commitType = type || "other";
+        const commitType = type ?? "other";
         if (!groupedCommits[commitType]) {
           groupedCommits[commitType] = [];
         }
@@ -128,7 +127,7 @@ function generateChangelogContent(
       const groupedCommits: Record<string, Commit[]> = {};
       commits.forEach((commit) => {
         const { type } = parseCommitMessage(commit.commit.message);
-        const commitType = type || "other";
+        const commitType = type ?? "other";
         if (!groupedCommits[commitType]) {
           groupedCommits[commitType] = [];
         }
@@ -137,7 +136,7 @@ function generateChangelogContent(
 
       Object.entries(groupedCommits).forEach(([type, typeCommits]) => {
         const title =
-          types[type] || type.charAt(0).toUpperCase() + type.slice(1);
+          types[type] ?? type.charAt(0).toUpperCase() + type.slice(1);
         content += `## ${title}\n\n`;
         typeCommits.forEach((commit) => {
           const { scope, description } = parseCommitMessage(
@@ -177,10 +176,11 @@ function generateChangelogContent(
 
 export async function POST(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth();
+    const { id } = await params;
 
     if (!session?.user?.id) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -189,7 +189,7 @@ export async function POST(
     // Get project and verify ownership
     const project = await db.query.projects.findFirst({
       where: and(
-        eq(projects.id, params.id),
+        eq(projects.id, id),
         eq(projects.createdById, session.user.id),
       ),
     });
@@ -218,6 +218,7 @@ export async function POST(
     try {
       settings = JSON.parse(project.settings) as ChangelogSettings;
     } catch (error) {
+      console.log(error);
       return new NextResponse("Invalid project settings", { status: 400 });
     }
 
@@ -227,6 +228,7 @@ export async function POST(
     // Save changelog to database
     const [changelog] = await db
       .insert(changelogs)
+      //@ts-expect-error this is a bug in the database schema
       .values({
         projectId: project.id,
         version,

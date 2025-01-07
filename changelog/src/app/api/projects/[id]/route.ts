@@ -17,10 +17,11 @@ const updateProjectSchema = z.object({
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth();
+    const { id } = await params;
 
     if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -28,7 +29,7 @@ export async function GET(
 
     const project = await db.query.projects.findFirst({
       where: and(
-        eq(projects.id, params.id),
+        eq(projects.id, id),
         eq(projects.createdById, session.user.id),
       ),
     });
@@ -46,10 +47,11 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth();
+    const { id } = await params;
 
     if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -60,7 +62,7 @@ export async function PATCH(
 
     const project = await db.query.projects.findFirst({
       where: and(
-        eq(projects.id, params.id),
+        eq(projects.id, id),
         eq(projects.createdById, session.user.id),
       ),
     });
@@ -74,7 +76,7 @@ export async function PATCH(
       .set({
         settings: JSON.stringify(body.settings),
       })
-      .where(eq(projects.id, params.id))
+      .where(eq(projects.id, id))
       .returning();
 
     return NextResponse.json(updatedProject[0]);
@@ -90,16 +92,15 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth();
+    const { id } = await params;
 
     if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-
-    const { id } = params;
 
     const project = await db.query.projects.findFirst({
       where: and(

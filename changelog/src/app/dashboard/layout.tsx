@@ -4,6 +4,7 @@ import { auth } from "@/server/auth";
 import Link from "next/link";
 import { UserButton } from "@/components/auth/user-button";
 import { cn } from "@/lib/utils";
+import { HomeIcon, SettingsIcon } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Dashboard | Changelog",
@@ -12,8 +13,8 @@ export const metadata: Metadata = {
 
 // Navigation items for the sidebar
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: "🏠" },
-  { name: "Settings", href: "/dashboard/settings", icon: "⚙️" },
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
+  { name: "Settings", href: "/dashboard/settings", icon: SettingsIcon },
 ];
 
 export default async function DashboardLayout({
@@ -33,14 +34,14 @@ export default async function DashboardLayout({
       <aside className="fixed inset-y-0 left-0 z-50 hidden w-64 transform bg-white shadow-lg transition-transform duration-200 ease-in-out lg:block">
         <div className="flex h-full flex-col">
           {/* Logo */}
-          <div className="flex h-16 items-center justify-center border-b">
+          <h1 className="flex h-16 items-center justify-start border-b ml-3">
             <Link
               href="/"
               className="text-xl font-bold text-gray-900 hover:text-gray-700"
             >
               Changelog
             </Link>
-          </div>
+          </h1>
 
           {/* Navigation */}
           <nav className="flex-1 space-y-1 px-2 py-4">
@@ -52,7 +53,9 @@ export default async function DashboardLayout({
                   "group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                 )}
               >
-                <span className="mr-3">{item.icon}</span>
+                <span className="mr-3">
+                  <item.icon size={20} />
+                </span>
                 {item.name}
               </Link>
             ))}
