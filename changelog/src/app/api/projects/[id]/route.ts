@@ -4,7 +4,7 @@ import { z } from "zod";
 import { eq, and } from "drizzle-orm";
 
 import { db } from "@/server/db";
-import { projects } from "@/server/db/schema";
+import { projects, changelogs } from "@/server/db/schema";
 
 const updateProjectSchema = z.object({
   settings: z.object({
@@ -99,9 +99,11 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
+    const { id } = params;
+
     const project = await db.query.projects.findFirst({
       where: and(
-        eq(projects.id, params.id),
+        eq(projects.id, id),
         eq(projects.createdById, session.user.id),
       ),
     });
@@ -110,7 +112,11 @@ export async function DELETE(
       return new NextResponse("Project not found", { status: 404 });
     }
 
-    await db.delete(projects).where(eq(projects.id, params.id));
+    // First delete all associated changelogs
+    await db.delete(changelogs).where(eq(changelogs.projectId, id));
+
+    // Then delete the project
+    await db.delete(projects).where(eq(projects.id, id));
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {

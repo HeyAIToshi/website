@@ -77,50 +77,51 @@ export default function DashboardPage() {
               className="h-[200px] animate-pulse rounded-lg border bg-muted"
             />
           ))
-        ) : projects.length > 0 ? (
-          // Project cards
-          projects.map((project) => (
-            <Link
-              key={project.id}
-              href={`/dashboard/projects/${project.id}`}
-              className="group rounded-lg border bg-card p-6 transition-colors hover:bg-accent"
-            >
-              <div className="mb-4 flex items-center gap-3">
-                <Github className="h-5 w-5 text-muted-foreground" />
-                <h3 className="font-semibold">{project.name}</h3>
-              </div>
-              {project.description && (
-                <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
-                  {project.description}
-                </p>
-              )}
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Calendar className="h-4 w-4" />
-                <span>
-                  Created{" "}
-                  {new Date(project.createdAt).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </span>
-              </div>
-            </Link>
-          ))
         ) : (
-          // Empty state
-          <Link
-            href="/dashboard/new"
-            className="flex h-[200px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-muted-foreground/25 bg-muted/50 p-8 text-center transition-colors hover:border-muted-foreground/50 hover:bg-muted"
-          >
-            <div className="rounded-full bg-background p-3">
-              <Plus className="h-6 w-6 text-muted-foreground" />
-            </div>
-            <h3 className="font-semibold">Add Project</h3>
-            <p className="text-sm text-muted-foreground">
-              Connect a GitHub repository to get started
-            </p>
-          </Link>
+          <>
+            {/* Project cards */}
+            {projects.map((project) => (
+              <Link
+                key={project.id}
+                href={`/dashboard/projects/${project.id}`}
+                className="group rounded-lg border bg-card p-6 transition-colors hover:bg-accent"
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <Github className="h-5 w-5 text-muted-foreground" />
+                  <h3 className="font-semibold">{project.name}</h3>
+                </div>
+                {project.description && (
+                  <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
+                    {project.description}
+                  </p>
+                )}
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <Calendar className="h-4 w-4" />
+                  <span>
+                    Created{" "}
+                    {new Date(project.createdAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+              </Link>
+            ))}
+            {/* Always show Add Project card */}
+            <Link
+              href="/dashboard/new"
+              className="flex h-[200px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-muted-foreground/25 bg-muted/50 p-8 text-center transition-colors hover:border-muted-foreground/50 hover:bg-muted"
+            >
+              <div className="rounded-full bg-background p-3">
+                <Plus className="h-6 w-6 text-muted-foreground" />
+              </div>
+              <h3 className="font-semibold">Add Project</h3>
+              <p className="text-sm text-muted-foreground">
+                Connect a GitHub repository
+              </p>
+            </Link>
+          </>
         )}
       </div>
     </div>
