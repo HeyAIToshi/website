@@ -9,7 +9,7 @@ import {
   users,
   verificationTokens,
 } from "@/server/db/schema";
-
+import { env } from "@/env";
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -38,7 +38,10 @@ declare module "next-auth" {
  */
 export const authConfig = {
   providers: [
-    GithubProvider,
+    GithubProvider({
+      clientId: env.AUTH_GITHUB_ID,
+      clientSecret: env.AUTH_GITHUB_SECRET,
+    }),
     /**
      * ...add more providers here.
      *
