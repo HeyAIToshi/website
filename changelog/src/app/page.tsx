@@ -1,12 +1,39 @@
+"use client";
+
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function HomePage() {
+  const { data: session } = useSession();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
         <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
           Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
         </h1>
+
+        <div className="flex flex-col items-center gap-4">
+          {session?.user ? (
+            <div className="flex flex-col items-center gap-4">
+              <p className="text-xl">Welcome, {session.user.name}!</p>
+              <button
+                onClick={() => signOut()}
+                className="rounded-lg bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => signIn("github")}
+              className="rounded-lg bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+            >
+              Sign in with GitHub
+            </button>
+          )}
+        </div>
+
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
           <Link
             className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
