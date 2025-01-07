@@ -7,6 +7,7 @@ import {
   text,
   timestamp,
   varchar,
+  boolean,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
@@ -30,13 +31,13 @@ export const posts = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (example) => ({
     createdByIdIdx: index("created_by_idx").on(example.createdById),
     nameIndex: index("name_idx").on(example.name),
-  })
+  }),
 );
 
 export const users = createTable("user", {
@@ -83,7 +84,7 @@ export const accounts = createTable(
       columns: [account.provider, account.providerAccountId],
     }),
     userIdIdx: index("account_user_id_idx").on(account.userId),
-  })
+  }),
 );
 
 export const accountsRelations = relations(accounts, ({ one }) => ({
@@ -106,7 +107,7 @@ export const sessions = createTable(
   },
   (session) => ({
     userIdIdx: index("session_user_id_idx").on(session.userId),
-  })
+  }),
 );
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({
@@ -125,5 +126,108 @@ export const verificationTokens = createTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  })
+  }),
 );
+
+export const projects = createTable(
+  "project",
+  {
+    id: varchar("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    name: varchar("name", { length: 255 }).notNull(),
+    description: text("description"),
+    repositoryUrl: varchar("repository_url", { length: 255 }).notNull(),
+    createdById: varchar("created_by", { length: 255 })
+      .notNull()
+      .references(() => users.id),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+      () => new Date(),
+    ),
+    settings: text("settings").notNull().default("{}"), // JSON string for project settings
+  },
+  (project) => ({
+    createdByIdIdx: index("project_created_by_idx").on(project.createdById),
+    repositoryUrlIdx: index("project_repository_url_idx").on(
+      project.repositoryUrl,
+    ),
+  }),
+);
+
+export const projectsRelations = relations(projects, ({ one, many }) => ({
+  creator: one(users, {
+    fields: [projects.createdById],
+    references: [users.id],
+  }),
+  changelogs: many(changelogs),
+  templates: many(templates),
+}));
+
+export const changelogs = createTable(
+  "changelog",
+  {
+    id: varchar("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    projectId: varchar("project_id", { length: 255 })
+      .notNull()
+      .references(() => projects.id),
+    version: varchar("version", { length: 50 }).notNull(),
+    content: text("content").notNull(),
+    publishedAt: timestamp("published_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+      () => new Date(),
+    ),
+  },
+  (changelog) => ({
+    projectIdIdx: index("changelog_project_id_idx").on(changelog.projectId),
+    versionIdx: index("changelog_version_idx").on(changelog.version),
+  }),
+);
+
+export const changelogsRelations = relations(changelogs, ({ one }) => ({
+  project: one(projects, {
+    fields: [changelogs.projectId],
+    references: [projects.id],
+  }),
+}));
+
+export const templates = createTable(
+  "template",
+  {
+    id: varchar("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    projectId: varchar("project_id", { length: 255 })
+      .notNull()
+      .references(() => projects.id),
+    name: varchar("name", { length: 255 }).notNull(),
+    content: text("content").notNull(),
+    isDefault: boolean("is_default").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+      () => new Date(),
+    ),
+  },
+  (template) => ({
+    projectIdIdx: index("template_project_id_idx").on(template.projectId),
+  }),
+);
+
+export const templatesRelations = relations(templates, ({ one }) => ({
+  project: one(projects, {
+    fields: [templates.projectId],
+    references: [projects.id],
+  }),
+}));
