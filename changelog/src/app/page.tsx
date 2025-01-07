@@ -34,7 +34,7 @@ export default function HomePage() {
             </Link>
           ) : (
             <button
-              onClick={() => signIn("github")}
+              onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
               className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <Github className="h-4 w-4" />

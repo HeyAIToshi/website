@@ -334,6 +334,7 @@ export default function ProjectPage() {
       </div>
     );
   }
+  
 
   if (!project) {
     return (
