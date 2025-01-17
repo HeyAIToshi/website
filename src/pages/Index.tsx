@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import { HiArrowRight, HiCheck } from "react-icons/hi2";
 import { Tweet } from "react-tweet";
 
-import { ThemeToggle } from "@/components/ThemeToggle";
-
 export default function AIToshiLanding() {
   return (
     <div className="flex flex-col min-h-screen bg-[#030712] dark:bg-[#000000] transition-colors duration-300">
@@ -650,7 +648,7 @@ export default function AIToshiLanding() {
           <div className="relative z-10 space-y-12">
             <div className="text-center space-y-4">
               <motion.span
-                className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-sky-400/10 to-indigo-400/10 dark:from-sky-500/10 dark:to-indigo-500/10 text-sm font-medium text-sky-400 dark:text-sky-300 border border-sky-400/20 dark:border-sky-500/20"
+                className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-sky-400/10 to-indigo-400/10 text-sm font-medium text-sky-400 dark:text-sky-300 border border-sky-400/20 dark:border-sky-500/20"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -793,8 +791,8 @@ export default function AIToshiLanding() {
             </div>
           </div>
         </motion.div>
-               {/* Featured Tweet Section */}
-               <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-16 sm:py-24">
+        {/* Featured Tweet Section */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-16 sm:py-24">
           {/* Animated background elements */}
           <div className="absolute inset-0">
             <motion.div
