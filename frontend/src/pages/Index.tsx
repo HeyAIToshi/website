@@ -3,11 +3,9 @@ import { motion } from "framer-motion";
 import { HiArrowRight, HiCheck } from "react-icons/hi2";
 import { Tweet } from "react-tweet";
 
-import { ThemeToggle } from "@/components/ThemeToggle";
-
 export default function AIToshiLanding() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#030712] dark:bg-[#000000] transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-[#030712] dark:bg-[#000000] dark transition-colors duration-300">
       <main className="flex-1 flex flex-col items-center justify-center relative overflow-hidden">
         {/* Enhanced Background gradients with more vibrant colors */}
         <div className="absolute inset-0">
