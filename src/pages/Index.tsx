@@ -45,15 +45,14 @@ export default function AIToshiLanding() {
         </div>
 
         {/* Enhanced Navbar with glassmorphism */}
-        <nav className="h-16 fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 p-2 sm:p-3 lg:p-4 max-w-7xl mx-auto w-full backdrop-blur-xl bg-white/[0.15] dark:bg-black-900/[0.85] rounded-2xl sm:rounded-3xl my-4 sm:my-6 border border-white/[0.2] dark:border-black-500/[0.2] ">
+        <nav className="h-14 fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 p-2 max-w-7xl mx-auto w-full backdrop-blur-xl bg-white/[0.15] dark:bg-black-900/[0.85] rounded-2xl sm:rounded-3xl my-2 border border-white/[0.2] dark:border-black-500/[0.2]">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-3 w-[150px]"
           >
             <span className="flex gap-2 justify-center items-center font-bold text-xl md:text-2xl bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 text-transparent bg-clip-text">
-            <img src="/logo-circle.png" className="h-12 w-auto"></img>
-
+              <img src="/logo-circle.png" className="h-12 w-auto"></img>
               AIToshi
             </span>
           </motion.div>
@@ -124,7 +123,7 @@ export default function AIToshiLanding() {
         </nav>
 
         {/* Enhanced Hero Section with better typography and gradients */}
-        <div className="relative z-10 text-center max-w-6xl mx-auto space-y-8 sm:space-y-12 pt-32 sm:pt-40 pb-8 sm:pb-12 px-4">
+        <div className="relative z-10 text-center max-w-6xl mx-auto space-y-6 pt-24 sm:pt-32 pb-6 sm:pb-8 px-4">
           <motion.div
             className="space-y-6"
             initial={{ opacity: 0, y: 20 }}
@@ -194,30 +193,9 @@ export default function AIToshiLanding() {
             </motion.a>
           </motion.div>
         </div>
-        {/* Twt Section */}
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:pb-16 sm:pt-24 space-y-24 sm:space-y-32">
-          <div className="max-w-6xl mx-auto mb-56 sm:mb-24 lg:mb-40 pt-16 lg:pt-20">
-            <div className="mt-16 text-center mx-auto rounded-2xl p-8 ">
-              <h2 className="font-2 text-4xl lg:text-6xl lg:leading-tight text-black dark:text-white font-semibold mb-6">
-                Solana DeFAI agent will fulfill Missing Bitcoin Mission
-              </h2>
-              <a
-                href="https://x.com/aeyakovenko/status/1835111527000817849"
-                target="_blank"
-                className="overflow-hidden w-full flex justify-center m-6 rounded-xl bg-white p-4"
-              >
-                <img
-                  src="/L2tweet.webp"
-                  alt="Task demonstration"
-                  className=" w-full h-full object-cover object-center transform group-hover:scale-[1.02] transition-transform duration-300"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
         {/* DeFAI Ecosystem Section with improved glassmorphism */}
-        <section className="py-24 sm:py-32 w-full relative overflow-hidden">
+        <section className="py-16 sm:py-24 w-full relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-[#0a0f1a] to-[#0f172a] opacity-90" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(2,132,199,0.2),transparent_50%)]" />
 
@@ -445,7 +423,7 @@ export default function AIToshiLanding() {
         </section>
 
         {/* DeFAI Research Section */}
-        <section className="py-16 sm:py-32 w-full backdrop-blur-sm bg-[#030712]/50 dark:bg-black/50 relative">
+        <section className="py-12 sm:py-24 w-full backdrop-blur-sm bg-[#030712]/50 dark:bg-black/50 relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.12),transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(2,132,199,0.15),transparent_50%)]" />
           <div className="max-w-7xl mx-auto px-4 relative z-10">
             <motion.div
@@ -660,7 +638,7 @@ export default function AIToshiLanding() {
 
         {/* why defai section with enhanced glassmorphism */}
         <motion.div
-          className="mt-24 p-12 sm:p-16 rounded-3xl bg-gradient-to-br from-white/[0.02] to-transparent dark:from-sky-500/[0.02] dark:to-indigo-500/[0.01] border border-white/[0.05] dark:border-sky-500/[0.05] backdrop-blur-xl relative overflow-hidden group"
+          className="mt-16 p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-white/[0.02] to-transparent dark:from-sky-500/[0.02] dark:to-indigo-500/[0.01] border border-white/[0.05] dark:border-sky-500/[0.05] backdrop-blur-xl relative overflow-hidden group"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -814,33 +792,96 @@ export default function AIToshiLanding() {
               </motion.div>
             </div>
           </div>
-          {/* Twt Section */}
-
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:pb-16 sm:pt-24 space-y-24 sm:space-y-32">
-            <div className="max-w-6xl mx-auto mb-56 sm:mb-24 lg:mb-40 pt-16 lg:pt-20">
-              <div className="mt-16 text-center mx-auto rounded-2xl p-8 ">
-                {/* <h2 className="font-2 text-4xl lg:text-6xl lg:leading-tight text-black dark:text-white font-semibold mb-6">
-                Solana DeFAI agent will fulfill Missing Bitcoin Mission
-              </h2> */}
-                <a
-                  href="https://x.com/aeyakovenko/status/1835111527000817849"
-                  target="_blank"
-                  className="overflow-hidden w-full flex justify-center m-6 rounded-xl bg-white p-4"
-                >
-                  <img
-                    src="/satoshi.webp"
-                    alt="Task demonstration"
-                    className=" w-full h-full object-cover object-center transform group-hover:scale-[1.02] transition-transform duration-300"
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
         </motion.div>
+               {/* Featured Tweet Section */}
+               <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-16 sm:py-24">
+          {/* Animated background elements */}
+          <div className="absolute inset-0">
+            <motion.div
+              className="absolute top-1/4 -left-48 w-96 h-96 bg-gradient-to-r from-sky-400/20 to-indigo-400/20 rounded-full blur-3xl"
+              animate={{
+                x: [0, 100, 0],
+                y: [0, 50, 0],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+          </div>
+
+          <div className="relative">
+            {/* Section header with enhanced typography */}
+            <motion.div
+              className="text-center space-y-6 mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <motion.span
+                className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-sky-400/10 to-indigo-400/10 text-sm font-medium text-sky-400 border border-sky-400/20"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                Featured Update
+              </motion.span>
+              <motion.h2
+                className="text-4xl lg:text-6xl font-bold"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <span className="bg-gradient-to-r from-sky-400 to-indigo-400 text-transparent bg-clip-text">
+                  Solana DeFAI Mission
+                </span>
+              </motion.h2>
+            </motion.div>
+
+            {/* Tweet card with glassmorphism */}
+            <motion.div
+              className="max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="p-8 rounded-2xl bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] hover:border-sky-400/50 transition-all duration-300 shadow-[0_8px_32px_0_rgba(56,189,248,0.1)]">
+                <div className="flex justify-center">
+                  <Tweet id="1835111527000817849" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Call-to-action buttons */}
+            <motion.div
+              className="flex flex-wrap justify-center gap-4 mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              <motion.a
+                href="https://x.com/aeyakovenko"
+                target="_blank"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group px-6 py-3 rounded-xl bg-gradient-to-r from-sky-400/10 to-indigo-400/10 text-sky-400 border border-sky-400/20 hover:border-sky-400/50 transition-all duration-300 flex items-center gap-2"
+              >
+                Follow Updates
+                <HiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </motion.a>
+            </motion.div>
+          </div>
+        </div>
       </main>
 
       <footer className="border-t border-white/[0.05] dark:border-sky-500/[0.05] transition-colors duration-300 bg-[#030712]/50 dark:bg-black/50 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12">
             <motion.div
               className="flex items-center space-x-3"
