@@ -44,7 +44,8 @@ export default function AIToshiLanding() {
 
         {/* Enhanced Navbar with glassmorphism */}
         <nav className="h-14 fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 p-2 max-w-7xl mx-auto w-full backdrop-blur-xl bg-white/[0.15] dark:bg-black-900/[0.85] rounded-2xl sm:rounded-3xl my-2 border border-white/[0.2] dark:border-black-500/[0.2]">
-          <motion.div
+          <motion.a
+            href="/"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-3 w-[150px]"
@@ -53,23 +54,13 @@ export default function AIToshiLanding() {
               <img src="/logo-circle.png" className="h-12 w-auto"></img>
               AIToshi
             </span>
-          </motion.div>
+          </motion.a>
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="hidden md:flex items-center gap-12 text-sm text-gray-400 dark:text-sky-100/60"
           >
-            <motion.a
-              href="https://dexscreener.com/solana/aitoshi"
-              target="_blank"
-              className="hover:text-sky-400 dark:hover:text-sky-300 transition-colors relative group"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>$AIToshi</span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 transition-all group-hover:w-full" />
-            </motion.a>
             <motion.a
               href="https://rovers-organization.gitbook.io/aitoshi"
               target="_blank"
@@ -103,7 +94,7 @@ export default function AIToshiLanding() {
               whileTap={{ scale: 0.95 }}
               className="whitespace-nowrap px-4 py-2 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-500 dark:to-indigo-500 text-white font-medium hover:from-sky-500 hover:to-indigo-500 dark:hover:from-sky-400 dark:hover:to-indigo-400 transition-all duration-300 shadow-lg shadow-sky-400/25 dark:shadow-sky-500/25"
             >
-              Connect Wallet
+              $AIToshi
             </motion.button>
           </div>
           <motion.button
