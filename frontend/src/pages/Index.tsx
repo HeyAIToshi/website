@@ -45,13 +45,15 @@ export default function AIToshiLanding() {
         </div>
 
         {/* Enhanced Navbar with glassmorphism */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 p-2 sm:p-3 lg:p-4 max-w-7xl mx-auto w-full backdrop-blur-xl bg-white/[0.15] dark:bg-black-900/[0.85] rounded-2xl sm:rounded-3xl my-4 sm:my-6 border border-white/[0.2] dark:border-black-500/[0.2] ">
+        <nav className="h-16 fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 p-2 sm:p-3 lg:p-4 max-w-7xl mx-auto w-full backdrop-blur-xl bg-white/[0.15] dark:bg-black-900/[0.85] rounded-2xl sm:rounded-3xl my-4 sm:my-6 border border-white/[0.2] dark:border-black-500/[0.2] ">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 w-[120px]"
+            className="flex items-center gap-3 w-[150px]"
           >
-            <span className="font-bold text-xl md:text-2xl bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 text-transparent bg-clip-text">
+            <span className="flex gap-2 justify-center items-center font-bold text-xl md:text-2xl bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 text-transparent bg-clip-text">
+            <img src="/logo-circle.png" className="h-12 w-auto"></img>
+
               AIToshi
             </span>
           </motion.div>
@@ -192,7 +194,28 @@ export default function AIToshiLanding() {
             </motion.a>
           </motion.div>
         </div>
+        {/* Twt Section */}
 
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:pb-16 sm:pt-24 space-y-24 sm:space-y-32">
+          <div className="max-w-6xl mx-auto mb-56 sm:mb-24 lg:mb-40 pt-16 lg:pt-20">
+            <div className="mt-16 text-center mx-auto rounded-2xl p-8 ">
+              <h2 className="font-2 text-4xl lg:text-6xl lg:leading-tight text-black dark:text-white font-semibold mb-6">
+                Solana DeFAI agent will fulfill Missing Bitcoin Mission
+              </h2>
+              <a
+                href="https://x.com/aeyakovenko/status/1835111527000817849"
+                target="_blank"
+                className="overflow-hidden w-full flex justify-center m-6 rounded-xl bg-white p-4"
+              >
+                <img
+                  src="/L2tweet.webp"
+                  alt="Task demonstration"
+                  className=" w-full h-full object-cover object-center transform group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
         {/* DeFAI Ecosystem Section with improved glassmorphism */}
         <section className="py-24 sm:py-32 w-full relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-[#0a0f1a] to-[#0f172a] opacity-90" />
@@ -789,6 +812,28 @@ export default function AIToshiLanding() {
                   <HiArrowRight className="w-5 h-5" />
                 </motion.a>
               </motion.div>
+            </div>
+          </div>
+          {/* Twt Section */}
+
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:pb-16 sm:pt-24 space-y-24 sm:space-y-32">
+            <div className="max-w-6xl mx-auto mb-56 sm:mb-24 lg:mb-40 pt-16 lg:pt-20">
+              <div className="mt-16 text-center mx-auto rounded-2xl p-8 ">
+                {/* <h2 className="font-2 text-4xl lg:text-6xl lg:leading-tight text-black dark:text-white font-semibold mb-6">
+                Solana DeFAI agent will fulfill Missing Bitcoin Mission
+              </h2> */}
+                <a
+                  href="https://x.com/aeyakovenko/status/1835111527000817849"
+                  target="_blank"
+                  className="overflow-hidden w-full flex justify-center m-6 rounded-xl bg-white p-4"
+                >
+                  <img
+                    src="/satoshi.webp"
+                    alt="Task demonstration"
+                    className=" w-full h-full object-cover object-center transform group-hover:scale-[1.02] transition-transform duration-300"
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>
