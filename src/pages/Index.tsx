@@ -61,21 +61,23 @@ export default function AIToshiLanding() {
             className="hidden md:flex items-center gap-12 text-sm text-gray-400 dark:text-sky-100/60"
           >
             <motion.a
-              href="#ecosystem"
+              href="https://dexscreener.com/solana/aitoshi"
+              target="_blank"
               className="hover:text-sky-400 dark:hover:text-sky-300 transition-colors relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Ecosystem</span>
+              <span>$AIToshi</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 transition-all group-hover:w-full" />
             </motion.a>
             <motion.a
-              href="#research"
+              href="https://rovers-organization.gitbook.io/aitoshi"
+              target="_blank"
               className="hover:text-sky-400 dark:hover:text-sky-300 transition-colors relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Research</span>
+              <span>Gitbook</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 transition-all group-hover:w-full" />
             </motion.a>
             <motion.a
@@ -84,19 +86,25 @@ export default function AIToshiLanding() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Tools</span>
+              <span>Dashboard</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 transition-all group-hover:w-full" />
             </motion.a>
           </motion.div>
           <div className="flex items-center gap-4 w-[120px] justify-end">
-            <motion.a
-              href="#"
+            <motion.button
+              onClick={() => {
+                if (window.solana && window.solana.isPhantom) {
+                  window.solana.connect();
+                } else {
+                  window.open("https://phantom.app/", "_blank");
+                }
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="whitespace-nowrap px-4 py-2 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-500 dark:to-indigo-500 text-white font-medium hover:from-sky-500 hover:to-indigo-500 dark:hover:from-sky-400 dark:hover:to-indigo-400 transition-all duration-300 shadow-lg shadow-sky-400/25 dark:shadow-sky-500/25"
             >
               Connect Wallet
-            </motion.a>
+            </motion.button>
           </div>
           <motion.button
             className="flex md:hidden items-center p-2 text-gray-400 dark:text-sky-100/60 hover:text-sky-400 dark:hover:text-sky-300"
@@ -135,13 +143,11 @@ export default function AIToshiLanding() {
               transition={{ delay: 0.3 }}
             >
               <motion.span
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-sky-400/10 to-indigo-400/10 dark:from-sky-500/10 dark:to-indigo-500/10 text-sky-400 dark:text-sky-300 font-medium border border-sky-400/20 dark:border-sky-500/20"
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-sky-400/10 to-indigo-400/10 text-sky-400 dark:text-sky-300 font-medium border border-sky-400/20 dark:border-sky-500/20"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="countdown font-mono">
-                  Visit in next 24 Hours
-                </span>
+                AI Toshi = Satoshi Vision + Solana DeFAI
               </motion.span>
             </motion.div>
             <motion.h1
@@ -167,8 +173,8 @@ export default function AIToshiLanding() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              Stay ahead of DeFAI trend on Solana with AIToshi, your ultimate
-              Solana DeFAI Buddy.
+              AI Toshi: Built to Achieve Satoshi's Vision of Banking the
+              Unbanked through Solana DeFi AI Agent!
             </motion.p>
           </motion.div>
 
@@ -179,7 +185,8 @@ export default function AIToshiLanding() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.a
-              href="#explore"
+              href="https://dexscreener.com/"
+              target="_blank"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-500 dark:to-indigo-500 text-white text-lg font-medium transition-all duration-300 flex items-center gap-2 shadow-[0_8px_32px_0_rgba(56,189,248,0.3)] dark:shadow-[0_8px_32px_0_rgba(2,132,199,0.3)] hover:shadow-[0_12px_40px_0_rgba(56,189,248,0.4)] dark:hover:shadow-[0_12px_40px_0_rgba(2,132,199,0.4)] overflow-hidden"
@@ -922,6 +929,11 @@ export default function AIToshiLanding() {
             viewport={{ once: true }}
           >
             © 2025 Everything Solana.
+            <div className="mt-4 text-xs max-w-2xl mx-auto">
+              Disclaimer: Investing in Crypto Coin like this involves risks,
+              including potential loss. Please research thoroughly and invest
+              responsibly.
+            </div>
           </motion.div>
         </div>
       </footer>
