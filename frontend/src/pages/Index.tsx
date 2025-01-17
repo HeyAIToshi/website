@@ -268,7 +268,7 @@ export default function TraycerLanding() {
             className="flex items-center gap-2 w-[120px]"
           >
             <span className="font-semibold text-lg md:text-xl text-black dark:text-white">
-              traycer
+              AIToshi
             </span>
           </motion.div>
           <motion.div
@@ -278,34 +278,37 @@ export default function TraycerLanding() {
             className="hidden md:flex items-center gap-12 text-sm text-gray-600 dark:text-blue-100/70"
           >
             <motion.a
-              href="#features"
+              href="https://rovers-organization.gitbook.io/aitoshi"
+              target="_blank"
               className="hover:text-black dark:hover:text-white transition-colors relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Features</span>
+              <span>GitBook</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black dark:bg-blue-400 transition-all group-hover:w-full" />
             </motion.a>
             <motion.a
-              href="#pricing"
+              href="https://medium.com/@aitoshixbt"
+              target="_blank"
               className="hover:text-black dark:hover:text-white transition-colors relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Pricing</span>
+              <span>Blogs</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black dark:bg-blue-400 transition-all group-hover:w-full" />
             </motion.a>
             <motion.a
-              href="#faq"
+              href="https://x.com/solana"
+              target="_blank"
               className="hover:text-black dark:hover:text-white transition-colors relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>FAQ</span>
+              <span>$AITOSHI</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black dark:bg-blue-400 transition-all group-hover:w-full" />
             </motion.a>
           </motion.div>
-          <div className="flex items-center gap-4 w-[120px] justify-end">
+          <div className="flex items-center gap-4 w-[280px] justify-end">
             <ThemeToggle />
             <motion.a
               href="#"
@@ -313,7 +316,7 @@ export default function TraycerLanding() {
               whileTap={{ scale: 0.95 }}
               className="px-4 py-2 rounded-lg bg-black/5 dark:bg-blue-500/20 text-black dark:text-blue-100 text-sm font-medium hover:bg-black/10 dark:hover:bg-blue-500/30 transition-colors border border-black/10 dark:border-blue-500/30"
             >
-              Login
+              Connect Wallet
             </motion.a>
           </div>
           <motion.button
@@ -339,14 +342,14 @@ export default function TraycerLanding() {
         </nav>
 
         {/* Enhanced Hero Section */}
-        <div className="relative z-10 text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 pt-24 sm:pt-32 pb-4 sm:pb-8 px-4">
+        <div className="pb-30 relative z-10 text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 pt-24 sm:pt-32 pb-4 sm:pb-8 px-4">
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <motion.div
+            {/* <motion.div
               className="flex items-center justify-center gap-2 text-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -357,27 +360,27 @@ export default function TraycerLanding() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                New Release
+                {" "}
               </motion.span>
               <motion.span
                 className="text-gray-600 dark:text-blue-100/70 flex items-center gap-1"
                 whileHover={{ x: 5 }}
               >
-                Introducing AI-powered code reviews
+                {" "}
                 <HiArrowRight className="inline-block" />
               </motion.span>
-            </motion.div>
+            </motion.div> */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-black dark:text-white leading-[1.1]"
+              className="text-4xl pt-20 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-black dark:text-white leading-[1.1]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Transform Your Code{" "}
+              AIToshi:{" "}
               <span className="relative">
                 <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 blur" />
                 <span className="relative bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
-                  With AI Magic
+                  Everything Solana DeFAI
                 </span>
               </span>
             </motion.h1>
@@ -387,8 +390,8 @@ export default function TraycerLanding() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              Experience the future of coding with Traycer. Write better code
-              faster, catch bugs earlier, and let AI handle the heavy lifting.
+              Stay ahead of DeFAI trend on Solana with AIToshi, your ultimate
+              Solana DeFAI Buddy.
             </motion.p>
           </motion.div>
 
@@ -399,12 +402,12 @@ export default function TraycerLanding() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.a
-              href="vscode:extension/cursor.cursor"
+              href="https://x.com/solana"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group relative px-8 py-4 rounded-xl bg-black dark:bg-blue-600 text-white text-lg font-medium transition-all duration-300 flex items-center gap-2 shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] overflow-hidden"
             >
-              <span className="relative z-10">Install Now - It's Free</span>
+              <span className="relative z-10">Explore</span>
               <HiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
               <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-800 dark:from-blue-600 dark:to-blue-500 group-hover:scale-110 transition-transform duration-300" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.3),transparent_70%)] group-hover:opacity-70 transition-opacity duration-300" />
@@ -420,7 +423,7 @@ export default function TraycerLanding() {
             </motion.a>
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             className="pt-12 flex flex-col items-center gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -470,10 +473,32 @@ export default function TraycerLanding() {
                 Trusted by 10,000+ developers
               </p>
             </motion.div>
-          </motion.div>
+          </motion.div> */}
         </div>
 
-        {/* Video Sections */}
+        {/* Twt Section */}
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:pb-16 sm:pt-24 space-y-24 sm:space-y-32">
+          <div className="max-w-6xl mx-auto mb-56 sm:mb-24 lg:mb-40 pt-16 lg:pt-20">
+            <div className="mt-16 text-center mx-auto rounded-2xl p-8 ">
+              <h2 className="font-2 text-4xl lg:text-6xl lg:leading-tight text-black dark:text-white font-semibold mb-6">
+                Solana DeFAI agent will fulfill Missing Bitcoin Mission
+              </h2>
+              <a
+                href="https://x.com/aeyakovenko/status/1835111527000817849"
+                target="_blank"
+                className="overflow-hidden w-full flex justify-center m-6 rounded-xl bg-white p-4"
+              >
+                <img
+                  src="/L2 tweet.webp"
+                  alt="Task demonstration"
+                  className=" w-full h-full object-cover object-center transform group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        {/* Ecosystem Sections */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:pb-16 sm:pt-24 space-y-24 sm:space-y-32">
           {/* Tasks Video Section */}
           <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
@@ -485,16 +510,31 @@ export default function TraycerLanding() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black dark:text-white leading-tight">
-                Transform Your Codebase <br />
+                Solana DeFAI Ecosystem is Growing,
                 <span className="bg-gradient-to-r from-black to-gray-800 dark:from-blue-400 dark:to-blue-500 text-transparent bg-clip-text">
-                  with AI
+                  Check Out the Top Projects
                 </span>
               </h2>
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-blue-100/70">
-                Just describe what you want to change in plain English. Traycer
-                handles complex refactoring, migrations, and codebase-wide
-                changes with confidence.
-              </p>
+              <ul className="flex flex-col text-black dark:text-white">
+                <li className="py-6 border-b border-gray-4">
+                  <div className="flex items-start gap-x-5 text-sm lg:text-base text-gray-2">
+                    Stay informed about the DeFAI ecosystem to capitalize on
+                    emerging opportunities.
+                  </div>
+                </li>
+                <li className="py-6 border-b border-gray-4">
+                  <div className="flex items-start gap-x-5 text-sm lg:text-base text-gray-2">
+                    Leverage AIToshi's 24/7 dashboard to explore and track
+                    Solana DeFAI projects.
+                  </div>
+                </li>
+                <li className="py-6 border-b border-gray-4">
+                  <div className="flex items-start gap-x-5 text-sm lg:text-base text-gray-2">
+                    Access insights from top crypto experts and analytical tools
+                    to evaluate new projects.
+                  </div>
+                </li>
+              </ul>
             </motion.div>
             <motion.div
               className="flex-1 rounded-2xl overflow-hidden shadow-2xl shadow-black/5 dark:shadow-blue-500/10 border border-gray-200/50 dark:border-[#1a2b4b]/50 relative group hover:shadow-2xl hover:shadow-black/10 dark:hover:shadow-blue-500/20 transition-all duration-300"
