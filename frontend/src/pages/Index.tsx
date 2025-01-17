@@ -52,8 +52,7 @@ export default function AIToshiLanding() {
             className="flex items-center gap-3 w-[150px]"
           >
             <span className="flex gap-2 justify-center items-center font-bold text-xl md:text-2xl bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 text-transparent bg-clip-text">
-            <img src="/logo-circle.png" className="h-12 w-auto"></img>
-
+              <img src="/logo-circle.png" className="h-12 w-auto"></img>
               AIToshi
             </span>
           </motion.div>
@@ -64,30 +63,30 @@ export default function AIToshiLanding() {
             className="hidden md:flex items-center gap-12 text-sm text-gray-400 dark:text-sky-100/60"
           >
             <motion.a
-              href="#ecosystem"
+              href="https://rovers-organization.gitbook.io/aitoshi"
               className="hover:text-sky-400 dark:hover:text-sky-300 transition-colors relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Ecosystem</span>
+              <span>GitBook</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 transition-all group-hover:w-full" />
             </motion.a>
             <motion.a
-              href="#research"
+              href="https://medium.com/@aitoshixbt"
               className="hover:text-sky-400 dark:hover:text-sky-300 transition-colors relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Research</span>
+              <span>Blogs</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 transition-all group-hover:w-full" />
             </motion.a>
             <motion.a
-              href="#tools"
+              href="https://x.com/solana"
               className="hover:text-sky-400 dark:hover:text-sky-300 transition-colors relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Tools</span>
+              <span>$AITOSHI</span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-indigo-400 dark:from-sky-300 dark:to-indigo-300 transition-all group-hover:w-full" />
             </motion.a>
           </motion.div>
